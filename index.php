@@ -9,3 +9,4 @@
 $HEADER = '一言';
 require( dirname( __FILE__ ) . '/load.php' );
 require( dirname( __FILE__ ) . '/template/index.php' );
+?>
