@@ -3,17 +3,27 @@
  * 登录相关
  *
  */
-$title = '登录';
-require_once 'load.php';
-get_header();
+
+//require_once "./load.php";
 
 if (is_user_login()) {
+    get_header('已登录');
     echo '已登陆';
+    get_footer();
+    exit;
 } else {
+    //判断是否为登录页面提交的表单
     if (isset($_POST['login']) ? $_POST['login'] : null == 1) {
+        //获取提交的用户名
         $username = isset($_POST['username']) ? $_POST['username'] : null;
+        //获取提交的密码
         $password = isset($_POST['password']) ? $_POST['password'] : null;
+        //判断提交的数据是否为空
         if (!empty($username) && !empty($password)) {
+            //非空输出
+            //echo '提交的用户名：'.$username;
+            //echo '提交的密码：'.$password;
+            
             $db = new DB;
             $id = $db->get_id($username);
             if (!empty($id)) {
@@ -38,10 +48,16 @@ if (is_user_login()) {
         }
 
     }
+}
 
+get_header('登录');
+if (is_user_login()) 
+{
+    echo '已登陆';
+}else{
     ?>
 <p>登录页面</p>
-<form method="post" action="login.php">
+<form method="post" action="?login">
     <p><label>账号：<input type="text" name="username"></label></p>
     <p><label>密码：<input type="password" name="password"></p>
     <p><input name="remember" type="checkbox">记住登录(暂无用)</p>
@@ -49,5 +65,6 @@ if (is_user_login()) {
     <input name="login" type="hidden" value="1">
 </form>
 
-<?php }
+<?php 
+}
 get_footer();?>

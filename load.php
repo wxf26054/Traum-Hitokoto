@@ -5,4 +5,4 @@
  */
 session_start();
 define ('DIR',dirname( __FILE__ ));
-require_once 'core/common.php';
+require_once DIR . '/core/common.php';

@@ -1,9 +1,11 @@
 <?php
 
+//调用数据库信息
 require_once 'database.php';
+//调用数据库处理函数库
 require_once 'database_query.php';
 
-function get_header()
+function get_header($title = '一言')
 {
     require DIR . '/template/header.php';
 }
