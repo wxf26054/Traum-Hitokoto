@@ -4,58 +4,46 @@
  *
  */
 
-//require_once "./load.php";
-
 if (is_user_login()) {
-    get_header('已登录');
-    echo '已登陆';
-    get_footer();
+    header('Location: /index.php');
     exit;
-} else {
-    //判断是否为登录页面提交的表单
-    if (isset($_POST['login']) ? $_POST['login'] : null == 1) {
-        //获取提交的用户名
-        $username = isset($_POST['username']) ? $_POST['username'] : null;
-        //获取提交的密码
-        $password = isset($_POST['password']) ? $_POST['password'] : null;
-        //判断提交的数据是否为空
-        if (!empty($username) && !empty($password)) {
-            //非空输出
-            //echo '提交的用户名：'.$username;
-            //echo '提交的密码：'.$password;
-            
-            $db = new DB;
-            $id = $db->get_id($username);
-            if (!empty($id)) {
-                $result = $db->check_user($username, $password);
-                if ($result) {
-                    echo '登录处理';
-                    //验证用户名和密码成功后
-                    $_SESSION['userinfo'] = array(
-                        'id' => $id,
-                        'username' => $username,
-                    );
-                    
-                } else {
-                    echo '契约错误';
-                }
+}
 
+//判断是否为登录页面提交的表单
+if (isset($_POST['login']) ? $_POST['login'] : null == 1) {
+    //获取提交的用户名
+    $username = isset($_POST['username']) ? $_POST['username'] : null;
+    //获取提交的密码
+    $password = isset($_POST['password']) ? $_POST['password'] : null;
+    //判断提交的数据是否为空
+    if (!empty($username) && !empty($password)) {
+        //非空输出
+        $db = new DB;
+        $id = $db->get_id($username);
+        if (!empty($id)) {
+            $result = $db->check_user($username, $password);
+            if (!empty($result)) {
+                //验证用户名和密码成功后
+                $_SESSION['userinfo'] = array(
+                    'id' => $id,
+                    'username' => $username,
+                );
+                header('Location: /index.php');
             } else {
-                echo '<script>alert("契约不存在<_<");</script>';
+                echo '契约错误';
             }
-        } else {
-            echo '<script>alert("信息不能为空");</script>';
-        }
 
+        } else {
+            echo '<script>alert("契约不存在<_<");</script>';
+        }
+    } else {
+        echo '<script>alert("信息不能为空");</script>';
     }
+
 }
 
 get_header('登录');
-if (is_user_login()) 
-{
-    echo '已登陆';
-}else{
-    ?>
+?>
 <p>登录页面</p>
 <form method="post" action="?login">
     <p><label>账号：<input type="text" name="username"></label></p>
@@ -64,7 +52,6 @@ if (is_user_login())
     <input type="submit" value="提交">
     <input name="login" type="hidden" value="1">
 </form>
-
-<?php 
-}
+没有契约？<a href="/?register" >签一个吧</a>
+<?php
 get_footer();?>

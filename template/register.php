@@ -7,7 +7,7 @@ $title = '签订契约';
 //require_once '../load.php';
 
 if (is_user_login()) {
-    echo '已登陆';
+    header('Location:/index.php');
 }
 
 //注册处理,判断数据是否来源注册页面
@@ -60,5 +60,5 @@ get_header('注册');
     <input type="submit" value="申请契约">
     <input type="hidden" name="register_check" value="1">
 </form>
-
+已经有契约了？<a href="/?login" >登录一下吧</a>
 <?php get_footer();?>

@@ -6,7 +6,6 @@
  * 
  */
 require( dirname( __FILE__ ) . '/load.php' );
-//require( dirname( __FILE__ ) . '/template/index.php' );
 
 if(isset($_GET['login'])){
     require 'template/login.php';
@@ -20,6 +19,11 @@ if(isset($_GET['register'])){
 
 if(isset($_GET['logout'])){
     require 'template/logout.php';
+    exit;
+}
+
+if(isset($_GET['add'])){
+    require 'template/add.php';
     exit;
 }
 

@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<meta charset='utf-8' />
 <title><?php echo $title; ?></title>
 </head>
 <body>
-<p>这是头部</p>
 <p>
+<a href="/?add" >添加句子</a>
 <?php 
 if(empty($_SESSION['userinfo']))
-echo '未登录';
+echo '未<a href="/?login" >登录</a>';
 else
-echo '用户名：'.$_SESSION['userinfo']['username'];
+echo '欢迎'.$_SESSION['userinfo']['username'].'  <a href="/?logout" >登出</a>';
 ?>
 </p>

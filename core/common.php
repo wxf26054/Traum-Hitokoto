@@ -27,3 +27,4 @@ function loginOut(){
     unset($_SESSION['userinfo']);
     // header('Location : /index.php');
 }
+

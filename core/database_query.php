@@ -12,12 +12,12 @@ class DB
         if (!$conn) {
             die('Could not connect: ' . mysqli_error());
         }
-        mysqli_set_charset($conn, DB_CHARSET);
         return $conn;
     }
 
     public function query($sql){
         $conn = $this->connection();
+        mysqli_set_charset($conn, DB_CHARSET);
         $retval = mysqli_query($conn,$sql );
         if(! $retval )
         {
@@ -43,9 +43,12 @@ class DB
         $sql = "SELECT * FROM `users` WHERE `username` LIKE '$username' AND `password` LIKE '$password'";
         $result = $this->query($sql);
         $id = mysqli_fetch_array($result)['id'];
-        if(!empty($id))
-        return true;
-        else 
-        return false;
+        return $id;
+    }
+
+    public function add_sentence($sentence,$userid){
+        $sql = "INSERT INTO `sentence` (`id`, `content`, `userid`) VALUES (NULL, '$sentence', '$userid');";
+        $result = $this->query($sql);
+        return $result;
     }
 }
