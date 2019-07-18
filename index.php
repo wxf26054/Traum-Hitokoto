@@ -27,4 +27,9 @@ if(isset($_GET['add'])){
     exit;
 }
 
+if(isset($_GET['my-sentences'])){
+    require 'template/my-sentences.php';
+    exit;
+}
+
 require 'template/index.php';

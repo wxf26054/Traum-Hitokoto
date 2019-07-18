@@ -20,4 +20,4 @@ define('DB_NAME', 'yy');
 define('DB_PORT', '3306');
 
 //数据库编码
-define('DB_CHARSET', 'utf8');
+define('DB_CHARSET', 'utf8mb4');
