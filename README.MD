@@ -16,3 +16,19 @@
 4.支持API
 
 5.以上功能正在增加以及完善中
+
+
+cat分类，对应关系如下
+
+    a——-Anime – 动画
+    b——-Comic – 漫画
+    c——-Game – 游戏
+    d——-Novel – 小说
+    e——-原创
+    f——-来自网络
+    g——-其他
+
+encode，对应关系如下
+
+    js——-返回函数名为cqchitokoto的JavaScript脚本，用于同步调用
+    json—–返回json数组

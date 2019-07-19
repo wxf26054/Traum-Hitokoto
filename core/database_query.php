@@ -49,8 +49,8 @@ class DB
         return $id;
     }
 
-    public function add_sentence($sentence,$userid){
-        $sql = "INSERT INTO `sentence` (`id`, `content`, `userid`) VALUES (NULL, '$sentence', '$userid');";
+    public function add_sentence($array_sentence,$userid){
+        $sql = "INSERT INTO `sentence` (`id`, `content`, `cat`, `userid`) VALUES (NULL, '" . $array_sentence['content'] . "', '" . $array_sentence['cat'] . "', '$userid');";
         $result = $this->query($sql);
         mysqli_close($this->connection());
         return $result;
@@ -67,5 +67,11 @@ class DB
         mysqli_free_result($result);
         mysqli_close($this->connection());
         return $array_content;
+    }
+
+    public function get_option_value($option_name){
+        $sql = "SELECT `option_value` FROM `options` WHERE `option_name` LIKE '$option_name'";
+        $result = mysqli_fetch_assoc($this->query($sql));
+        return $result['option_value'];
     }
 }
