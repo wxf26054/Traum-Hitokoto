@@ -72,6 +72,14 @@ class DB
     public function get_option_value($option_name){
         $sql = "SELECT `option_value` FROM `options` WHERE `option_name` LIKE '$option_name'";
         $result = mysqli_fetch_assoc($this->query($sql));
+        mysqli_close($this->connection());
         return $result['option_value'];
+    }
+
+    public function delete_sentence($id){
+        $sql = "DELETE FROM `sentence` WHERE `sentence`.`id` = $id";
+        $result = $this->query($sql);
+        mysqli_close($this->connection());
+        return $result;
     }
 }

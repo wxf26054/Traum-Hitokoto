@@ -28,7 +28,7 @@ if(isset($_POST['add-sentence'])?$_POST['add-sentence']:null == 1 && !empty($sen
     else echo 'failed';
 }
 
-//获取分类并转为数组
+//获取分类并转为数组(get category and transform to array)
 $cat = $db->get_option_value('cat');
 $array_cat = json_decode($cat,true);
 
