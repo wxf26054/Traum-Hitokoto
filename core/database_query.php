@@ -56,8 +56,8 @@ class DB
         return $result;
     }
 
-    public function get_user_sentences($userid){
-        $sql = "SELECT * FROM `sentence` WHERE `userid` LIKE '$userid'";
+    public function get_user_sentences($userid, $page){
+        $sql = "SELECT * FROM `sentence` WHERE `userid` LIKE '$userid' LIMIT " . 10*($page-1) . ",10";
         $result = $this->query($sql);
         $array_content = array();
         $id = 0;
@@ -79,6 +79,24 @@ class DB
     public function delete_sentence($id){
         $sql = "DELETE FROM `sentence` WHERE `sentence`.`id` = $id";
         $result = $this->query($sql);
+        mysqli_close($this->connection());
+        return $result;
+    }
+
+    public function get_number_sentences($userid){
+        $sql = "SELECT COUNT(*) FROM `sentence` WHERE `userid` = '$userid'"; 
+        $result = mysqli_fetch_assoc($this->query($sql));
+        mysqli_close($this->connection());
+        return $result['COUNT(*)'];
+    }
+
+    public function get_similar_sentence($keyword){
+        $sql = "SELECT * FROM `sentence` WHERE `content` LIKE '%$keyword%' ";
+        $query = $this->query($sql);
+        $i = 0;
+        while($value = mysqli_fetch_assoc($query)){
+            $result[$i++] = $value;
+        }
         mysqli_close($this->connection());
         return $result;
     }
