@@ -38,17 +38,17 @@ $user_sentences = $db->get_user_sentences($_SESSION['userinfo']['id'], $page);
 //get the number of sentences
 $sentence_number = $db->get_number_sentences($_SESSION['userinfo']['id']);
 //目的：求总页数，只要有余数就进一
-//[总页数 + (总记录数/每页最大记录数)的最大余数]%每页最大记录数
-$total_page = ($sentence_number + 9) % 10;
+//[总页数 + (总记录数/每页最大记录数)的最大余数]/每页最大记录数
+$total_page = ceil ($sentence_number / 10);
 
 $cat = $db->get_option_value('cat');
 $cat = json_decode($cat, true);
 
 //output
-echo '<table border="1"><tbody><tr><td>序号</td><td>句子</td><td>分类</td><td>操作</td></tr>';
+echo '<table border="1"><tbody><tr><td>序号</td><td>句子</td><td>来源</td><td>分类</td><td>操作</td></tr>';
 
 foreach ($user_sentences as $key => $value):
-    echo '<tr><td>' . $key . '</td><td>' . $value['content'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/?my-sentences&action=delete&id=' . $value['id'] . '" >删除</a></td></tr>';
+    echo '<tr><td>' . $key . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/?my-sentences&action=delete&id=' . $value['id'] . '" >删除</a></td></tr>';
 endforeach;
 reset($user_sentences);
 echo '</tbody></table>';

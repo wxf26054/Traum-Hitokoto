@@ -50,7 +50,7 @@ class DB
     }
 
     public function add_sentence($array_sentence,$userid){
-        $sql = "INSERT INTO `sentence` (`id`, `content`, `cat`, `userid`) VALUES (NULL, '" . $array_sentence['content'] . "', '" . $array_sentence['cat'] . "', '$userid');";
+        $sql = "INSERT INTO `sentence` (`id`, `content`, `cat`, `source`, `userid`) VALUES (NULL, '" . $array_sentence['content'] . "', '" . $array_sentence['cat'] . "', '" . $array_sentence['source'] . "', '$userid');";
         $result = $this->query($sql);
         mysqli_close($this->connection());
         return $result;
@@ -85,6 +85,7 @@ class DB
 
     public function get_number_sentences($userid){
         $sql = "SELECT COUNT(*) FROM `sentence` WHERE `userid` = '$userid'"; 
+        $result = array();
         $result = mysqli_fetch_assoc($this->query($sql));
         mysqli_close($this->connection());
         return $result['COUNT(*)'];
@@ -93,6 +94,7 @@ class DB
     public function get_similar_sentence($keyword){
         $sql = "SELECT * FROM `sentence` WHERE `content` LIKE '%$keyword%' ";
         $query = $this->query($sql);
+        $result = array();
         $i = 0;
         while($value = mysqli_fetch_assoc($query)){
             $result[$i++] = $value;

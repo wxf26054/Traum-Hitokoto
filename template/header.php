@@ -6,7 +6,7 @@
 </head>
 <body>
 <p>
-<a href="/?add" >添加句子</a>|<a href="/?my-sentences" >我的句子</a>
+<a href="/" >首页</a>|<a href="/?add" >添加句子</a>|<a href="/?my-sentences" >我的句子</a>
 <?php 
 if(empty($_SESSION['userinfo']))
 echo '未<a href="/?login" >登录</a>';

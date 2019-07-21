@@ -27,3 +27,12 @@ function loginOut(){
     unset($_SESSION['userinfo']);
     // header('Location : /index.php');
 }
+
+function mb_str_split($str, $count){
+    $leng = strlen($str)/3;     //中文长度
+    $arr = array();
+    for ($i=0; $i < $leng; $i+=$count) {
+        $arr[] = mb_substr($str, $i, $count);
+    }
+    return $arr;
+}
