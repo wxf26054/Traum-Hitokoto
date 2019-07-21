@@ -49,15 +49,26 @@ class DB
         return $id;
     }
 
-    public function add_sentence($array_sentence,$userid){
-        $sql = "INSERT INTO `sentence` (`id`, `content`, `cat`, `source`, `userid`) VALUES (NULL, '" . $array_sentence['content'] . "', '" . $array_sentence['cat'] . "', '" . $array_sentence['source'] . "', '$userid');";
-        $result = $this->query($sql);
-        mysqli_close($this->connection());
+    public function add_hitokoto($array_hitokoto,$userid){
+        $conn = $this->connection();
+        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `userid`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '$userid');";
+        $retval = mysqli_query($conn,$sql );
+        if(! $retval )
+        {
+            die('数据库查询失败: ' . mysqli_error($conn));
+        }
+        $tetval =  mysqli_query($conn,'SELECT LAST_INSERT_ID()');
+        if(! $retval )
+        {
+            die('数据库查询失败: ' . mysqli_error($conn));
+        }
+        $result = mysqli_fetch_assoc($tetval);
+        mysqli_close($conn);
         return $result;
     }
 
     public function get_user_sentences($userid, $page){
-        $sql = "SELECT * FROM `sentence` WHERE `userid` LIKE '$userid' LIMIT " . 10*($page-1) . ",10";
+        $sql = "SELECT * FROM `hitokoto` WHERE `userid` LIKE '$userid' LIMIT " . 10*($page-1) . ",10";
         $result = $this->query($sql);
         $array_content = array();
         $id = 0;
@@ -77,14 +88,14 @@ class DB
     }
 
     public function delete_sentence($id){
-        $sql = "DELETE FROM `sentence` WHERE `sentence`.`id` = $id";
+        $sql = "DELETE FROM `hitokoto` WHERE `hitokoto`.`id` = $id";
         $result = $this->query($sql);
         mysqli_close($this->connection());
         return $result;
     }
 
     public function get_number_sentences($userid){
-        $sql = "SELECT COUNT(*) FROM `sentence` WHERE `userid` = '$userid'"; 
+        $sql = "SELECT COUNT(*) FROM `hitokoto` WHERE `userid` = '$userid'"; 
         $result = array();
         $result = mysqli_fetch_assoc($this->query($sql));
         mysqli_close($this->connection());
@@ -92,7 +103,7 @@ class DB
     }
 
     public function get_similar_sentence($keyword){
-        $sql = "SELECT * FROM `sentence` WHERE `content` LIKE '%$keyword%' ";
+        $sql = "SELECT * FROM `hitokoto` WHERE `content` LIKE '%$keyword%' ";
         $query = $this->query($sql);
         $result = array();
         $i = 0;

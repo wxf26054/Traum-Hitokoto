@@ -49,23 +49,23 @@ $cat = json_decode($cat, true);
 echo '<table border="1"><tbody><tr><td>序号</td><td>句子</td><td>来源</td><td>分类</td><td>操作</td></tr>';
 
 foreach ($user_sentences as $key => $value):
-    echo '<tr><td>' . $key . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/?my-sentences&action=delete&id=' . $value['id'] . '" >删除</a></td></tr>';
+    echo '<tr><td>' . $key . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/?my_hitokoto&action=delete&id=' . $value['id'] . '" >删除</a></td></tr>';
 endforeach;
 reset($user_sentences);
 echo '</tbody></table>';
 
 if ($page != 1) {
-    echo '<a href="/?my-sentences&page=' . ($page - 1) . '">上一页</a>';
+    echo '<a href="/?my_hitokoto&page=' . ($page - 1) . '">上一页</a>';
 }
 for ($i = 1; $i <= $total_page; $i++) {
     if ($i != $page) {
-        echo '&nbsp;<a href="/?my-sentences&page=' . $i . '">' . $i . '</a>&nbsp;';
+        echo '&nbsp;<a href="/?my_hitokoto&page=' . $i . '">' . $i . '</a>&nbsp;';
     } else {
         echo $i;
     }
 }
 if ($page != $total_page) {
-    echo '<a href="/?my-sentences&page=' . ($page + 1) . '">下一页</a>';
+    echo '<a href="/?my_hitokoto&page=' . ($page + 1) . '">下一页</a>';
 }
 
 get_footer();
