@@ -1,4 +1,5 @@
 <?php
+ if (!defined('DIR'))exit('error');
 /**
  * 用户的句子(sentences of user)
  *

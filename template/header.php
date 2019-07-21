@@ -1,3 +1,4 @@
+<?php if (!defined('DIR'))exit('error'); ?>
 <!DOCTYPE HTML>
 <html>
 <head>

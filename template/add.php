@@ -3,6 +3,9 @@
  * 句子添加模块(the module of adding sentence)
  *
  */
+
+if (!defined('DIR'))
+exit('error');
 if (!is_user_login()) {
     header('Location:/?login');
 }

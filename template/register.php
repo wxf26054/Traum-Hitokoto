@@ -3,6 +3,7 @@
  * 注册相关
  *
  */
+if (!defined('DIR'))exit('error');
 $title = '签订契约';
 //require_once '../load.php';
 
