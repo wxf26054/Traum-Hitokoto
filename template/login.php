@@ -19,13 +19,13 @@ if (isset($_POST['login']) ? $_POST['login'] : null == 1) {
     if (!empty($username) && !empty($password)) {
         //非空输出
         $db = new DB;
-        $id = $db->get_id($username);
-        if (!empty($id)) {
+        $user_id = $db->get_userid_by_username($username);
+        if (!empty($user_id)) {
             $result = $db->check_user($username, $password);
             if (!empty($result)) {
                 //验证用户名和密码成功后
                 $_SESSION['userinfo'] = array(
-                    'id' => $id,
+                    'userid' => $user_id,
                     'username' => $username,
                 );
                 header('Location: /index.php');

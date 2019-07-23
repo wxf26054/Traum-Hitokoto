@@ -27,6 +27,11 @@ if (isset($_GET['add'])) {
     exit;
 }
 
+if (isset($_GET['edit'])) {
+    require 'template/edit.php';
+    exit;
+}
+
 if (isset($_GET['my_hitokoto'])) {
     require 'template/my_hitokoto.php';
     exit;

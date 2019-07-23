@@ -33,7 +33,7 @@ class DB
         return $result;
     }
 
-    public function get_id($username){
+    public function get_userid_by_username($username){
         $sql = "SELECT * FROM `users` WHERE `username` LIKE '$username'";
         $result = $this->query($sql);
         $id = mysqli_fetch_assoc($result)['id'];
@@ -110,6 +110,23 @@ class DB
         while($value = mysqli_fetch_assoc($query)){
             $result[$i++] = $value;
         }
+        mysqli_close($this->connection());
+        return $result;
+    }
+
+    public function get_hitokoto_by_id($hitokoto_id){
+        $sql = "SELECT * FROM `hitokoto` WHERE `userid` LIKE '". $_SESSION['userinfo']['userid'] ."' AND `id` LIKE '$hitokoto_id'";
+        $result = $this->query($sql);
+        $array_content = array();
+        $array_content = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
+        mysqli_close($this->connection());
+        return $array_content;
+    }
+
+    public function update_hitokoto($new_hitokoto){
+        $sql = "UPDATE `hitokoto` SET `content` = '".$new_hitokoto['content']."', `cat` = '".$new_hitokoto['cat']."', `source` = '".$new_hitokoto['source']."' WHERE `hitokoto`.`id` = ".$new_hitokoto['id'];
+        $result = $this->query($sql);
         mysqli_close($this->connection());
         return $result;
     }
