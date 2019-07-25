@@ -61,11 +61,14 @@ class DB
         while ($row = mysqli_fetch_assoc($get_id)){
             $array_id[++$i] = $row['id'];
         }
+        
+        //accesses加1
+        $this->query("UPDATE hitokoto set accesses=accesses+1 where id = $array_id[$rand_id]");
+        $this->query("UPDATE `data` SET `data_value` = data_value + 1 WHERE `data`.`data_id` = 1 ");
+
         //根据  取出的随机编号所对应的id  取得数据
         $sql = "SELECT * FROM hitokoto WHERE id = $array_id[$rand_id]";
         $result = mysqli_fetch_assoc($this->query($sql));
-        //查询成功后accesses加1
-        $this->query("UPDATE hitokoto set accesses=accesses+1 where id = $array_id[$rand_id]");
         mysqli_close($this->connection());
         return $result;
     }

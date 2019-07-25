@@ -2,6 +2,10 @@
 /**
  * API
  */
+
+//计时开始
+runtime();
+
 require_once '../core/database.php';
 require_once 'api_db_query.php';
 
@@ -47,7 +51,9 @@ switch ($encode) {
         $hitokoto = $fun . '(' . json_encode($hitokoto) . ');';
         break;
     case 'json':
-        $content_type = 'application/json';
+        $content_type = 'application/json';        
+        //计时结束.
+        $hitokoto['use_time'] = runtime(1);
         $hitokoto = json_encode($hitokoto);
         break;
     default:
@@ -64,3 +70,16 @@ switch ($encode) {
 header("Content-type: $content_type;charset=$charset");
 
 echo $hitokoto;
+ 
+//计时函数 
+function runtime($mode=0) {
+ static $t; 
+ if(!$mode) { 
+  $t = microtime();
+  return;
+ } 
+ $t1 = microtime(); 
+ list($m0,$s0) = explode(" ",$t); 
+ list($m1,$s1) = explode(" ",$t1); 
+ return sprintf("%.3f ms",($s1+$m1-$s0-$m0)*1000);
+}

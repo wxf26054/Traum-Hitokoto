@@ -14,7 +14,7 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 
 //数据库名
-define('DB_NAME', 'yy');
+define('DB_NAME', 'hitokoto');
 
 //数据库端口
 define('DB_PORT', '3306');
