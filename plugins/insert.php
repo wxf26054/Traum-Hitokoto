@@ -5,7 +5,7 @@
  */
 
  if (!defined('DIR'))
- exit('error');
+ exit('非法访问');
 
 $content = file_get_contents(DIR.'/step/hitokoto - chinese.json');
 $content = json_decode($content,true);

@@ -1,11 +1,9 @@
 <?php
 /**
- * 注册相关
+ * 注册相关（Register）
  *
  */
-if (!defined('DIR'))exit('error');
-$title = '签订契约';
-//require_once '../load.php';
+if (!defined('DIR'))exit('非法访问');
 
 if (is_user_login()) {
     header('Location:/index.php');

@@ -1,6 +1,6 @@
 <?php
 if (!defined('DIR')) {
-    exit('error');
+    exit('非法访问');
 }
 
 get_header();

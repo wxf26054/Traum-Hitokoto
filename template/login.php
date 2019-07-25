@@ -3,7 +3,7 @@
  * 登录相关
  *
  */
- if (!defined('DIR'))exit('error');
+ if (!defined('DIR'))exit('非法访问');
 if (is_user_login()) {
     header('Location: /index.php');
     exit;

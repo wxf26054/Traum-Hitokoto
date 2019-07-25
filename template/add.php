@@ -4,8 +4,10 @@
  *
  */
 
-if (!defined('DIR'))
-exit('error');
+if (!defined('DIR')) {
+    exit('非法访问');
+}
+
 if (!is_user_login()) {
     header('Location:/?login');
 }
@@ -31,7 +33,7 @@ if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty
         //添加一言(add hitokoto)
         $result = $db->add_hitokoto($array_hitokoto, $_SESSION['userinfo']['userid']);
         if ($result['LAST_INSERT_ID()']) {
-            echo '插入成功！ID：'.$result['LAST_INSERT_ID()'];
+            echo '插入成功！ID：' . $result['LAST_INSERT_ID()'];
         } else {
             echo 'failed';
         }

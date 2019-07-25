@@ -3,7 +3,7 @@
  * 编辑页面
  */
 if (!defined('DIR')) {
-    exit('error');
+    exit('非法访问');
 }
 
 get_header('编辑');
@@ -38,8 +38,6 @@ if (!empty($hitokoto_id)) {
             } else {
                 echo '修改失败';
             }
-        } else {
-            echo '你的操作不对';
         }
 
         //第二次请求

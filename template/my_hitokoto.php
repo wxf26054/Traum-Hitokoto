@@ -1,5 +1,5 @@
 <?php
- if (!defined('DIR'))exit('error');
+ if (!defined('DIR'))exit('非法访问');
 /**
  * 用户的句子(sentences of user)
  *
