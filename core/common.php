@@ -5,7 +5,7 @@ require_once 'database.php';
 //调用数据库处理函数库
 require_once 'database_query.php';
 
-function get_header($title = '一言')
+function get_header($title = '一言|Hitokoto/ヒトコト')
 {
     require DIR . '/template/header.php';
 }
