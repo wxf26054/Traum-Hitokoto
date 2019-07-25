@@ -3,11 +3,11 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<title><?php echo $title; ?></title>
+<title><?php echo $title.'|Hitokoto/ヒトコト'; ?></title>
 </head>
 <body>
 <p>
-<a href="/" >茵蒂克丝</a>|<a href="/?add" >添加句子</a>|<a href="/?my_hitokoto" >我的句子</a>
+<a href="/" >茵蒂克丝</a>|<a href="/?add" >添加句子</a>|<a href="/?my_hitokoto" >我的句子</a>|<a href="/?doc" >API文档</a>
 <?php 
 if(empty($_SESSION['userinfo']))
 echo '未<a href="/?login" >登录</a>';

@@ -37,6 +37,12 @@ if (isset($_GET['my_hitokoto'])) {
     exit;
 }
 
+if (isset($_GET['doc'])) {
+    require 'template/doc.php';
+    exit;
+}
+
+
 if (isset($_GET['plugins'])) {
     switch ($_GET['plugins']) {
         case 'insert':
