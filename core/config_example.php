@@ -21,3 +21,6 @@ define('DB_PORT', '3306');
 
 //数据库编码
 define('DB_CHARSET', 'utf8mb4');
+
+//网页后缀
+define('URL_NAME', '.air');
