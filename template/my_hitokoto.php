@@ -51,24 +51,24 @@ $cat = json_decode($cat, true);
 echo '<table border="1"><tbody><tr><td>序号</td><td>句子</td><td>来源</td><td>分类</td><td>操作</td></tr>';
 
 foreach ($user_sentences as $key => $value):
-    echo '<tr><td>' . $key . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/?edit&hitokoto_id=' . $value['id'] . '" >编辑</a>|<a href="/?my_hitokoto&action=delete&hitokoto_id=' . $value['id'] . '" >删除</a></td></tr>';
+    echo '<tr><td>' . $key . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/edit'.URL_NAME.'?hitokoto_id=' . $value['id'] . '" >编辑</a>|<a href="/my_hitokoto'.URL_NAME.'?action=delete&hitokoto_id=' . $value['id'] . '" >删除</a></td></tr>';
 endforeach;
 reset($user_sentences);
 echo '</tbody></table>';
 
 if ($page != 1) {
-    echo '<a href="/?my_hitokoto&page=1">首页</a><a href="/?my_hitokoto&page=' . ($page - 1) . '">上一页</a>';
+    echo '<a href="/my_hitokoto'.URL_NAME.'?page=1">首页</a><a href="/my_hitokoto'.URL_NAME.'?page=' . ($page - 1) . '">上一页</a>';
 }
 for ($i = 1; $i <= $total_page; $i++) {
     if ($i != $page) {
         if($i > $page - 5 && $i < $page + 5)
-        echo '&nbsp;<a href="/?my_hitokoto&page=' . $i . '">' . $i . '</a>&nbsp;';
+        echo '&nbsp;<a href="/my_hitokoto'.URL_NAME.'?page=' . $i . '">' . $i . '</a>&nbsp;';
     } else {
         echo $i;
     }
 }
 if ($page != $total_page) {
-    echo '<a href="/?my_hitokoto&page=' . ($page + 1) . '">下一页</a><a href="/?my_hitokoto&page=' . $total_page . '">尾页</a>';
+    echo '<a href="/my_hitokoto'.URL_NAME.'?page=' . ($page + 1) . '">下一页</a><a href="/my_hitokoto'.URL_NAME.'?page=' . $total_page . '">尾页</a>';
 }
 
 get_footer();

@@ -7,11 +7,11 @@
 </head>
 <body>
 <p>
-<a href="/" >茵蒂克丝</a>|<a href="/?add" >添加句子</a>|<a href="/?my_hitokoto" >我的句子</a>|<a href="/?doc" >API文档</a>
+<a href="/" >茵蒂克丝</a>|<a href="/add<?php echo URL_NAME; ?>" >添加句子</a>|<a href="/my_hitokoto<?php echo URL_NAME; ?>" >我的句子</a>|<a href="/doc<?php echo URL_NAME; ?>" >API文档</a>
 <?php 
 if(empty($_SESSION['userinfo']))
-echo '未<a href="/?login" >登录</a>';
+echo '未<a href="/login<?php echo URL_NAME; ?>" >登录</a>';
 else
-echo '欢迎'.$_SESSION['userinfo']['username'].'  <a href="/?logout" >登出</a>';
+echo '欢迎'.$_SESSION['userinfo']['username'].'  <a href="/logout<?php echo URL_NAME; ?>" >登出</a>';
 ?>
 </p>

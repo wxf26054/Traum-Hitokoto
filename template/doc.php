@@ -75,11 +75,11 @@ get_header('API文档');
         var fun = GetQueryString('fun');
         var source = GetQueryString('source');
         if (i == 1){
-            console.log("请求：http://127.0.0.1/api/\n" + "参数：cat=" + cat + " charset=" + charset + " length=" + length + " encode=" + encode + " fun=" + fun + " source=" + source + "\n" + "返回：" + document.getElementById('hitokoto').contentWindow.document.getElementsByTagName('pre')[0].innerHTML);
+            console.log("请求：/api/\n" + "参数：cat=" + cat + " charset=" + charset + " length=" + length + " encode=" + encode + " fun=" + fun + " source=" + source + "\n" + "返回：" + document.getElementById('hitokoto').contentWindow.document.getElementsByTagName('pre')[0].innerHTML);
         }else{
             i = 1;
         }
-        document.getElementById("hitokoto").src = (document.getElementsByName("code")[0].value = "http://127.0.0.1/api/?cat=" + document.getElementsByName("cat")[0].value +"&charset=" + document.getElementsByName("charset")[0].value +"&length=" +  document.getElementsByName("length")[0].value + "&encode=" + document.getElementsByName("encode")[0].value + "&fun=" + document.getElementsByName("fun")[0].value + "&source=" + document.getElementsByName("source")[0].value) + "&iframe=true";
+        document.getElementById("hitokoto").src = (document.getElementsByName("code")[0].value = "/api/?cat=" + document.getElementsByName("cat")[0].value +"&charset=" + document.getElementsByName("charset")[0].value +"&length=" +  document.getElementsByName("length")[0].value + "&encode=" + document.getElementsByName("encode")[0].value + "&fun=" + document.getElementsByName("fun")[0].value + "&source=" + document.getElementsByName("source")[0].value) + "&iframe=true";
     }
 </script>
 <?php

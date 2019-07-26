@@ -6,7 +6,7 @@
 //计时开始
 runtime();
 
-require_once '../core/database.php';
+require_once '../core/config.php';
 require_once 'api_db_query.php';
 
 $db = new DB;
@@ -67,6 +67,7 @@ switch ($encode) {
         break;
 }
 
+header('Access-Control-Allow-Origin: *');
 header("Content-type: $content_type;charset=$charset");
 
 echo $hitokoto;

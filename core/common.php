@@ -1,7 +1,7 @@
 <?php
 
 //调用数据库信息
-require_once 'database.php';
+require_once 'config.php';
 //调用数据库处理函数库
 require_once 'database_query.php';
 

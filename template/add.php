@@ -49,7 +49,7 @@ $array_cat = json_decode($cat, true);
 ?>
 <p>这里是添加句子</p>
 你的句子：
-<form method="post" action="/?add">
+<form method="post" action="/add.air">
     <input type="text" name="hitokoto_content" onblur="if(this.value=='')this.value='呐，知道么，樱花飘落的速度，是每秒五厘米哦~';" onfocus="if(this.value=='呐，知道么，樱花飘落的速度，是每秒五厘米哦~')this.value='';" value="呐，知道么，樱花飘落的速度，是每秒五厘米哦~">
     <select name="hitokoto_cat">
         <?php
