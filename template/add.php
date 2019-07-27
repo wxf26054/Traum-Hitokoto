@@ -29,6 +29,7 @@ if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty
             'content' => $hitokoto_content,
             'cat' => $hitokoto_cat,
             'source' => $source,
+            'date' => null
         );
         //添加一言(add hitokoto)
         $result = $db->add_hitokoto($array_hitokoto, $_SESSION['userinfo']['userid']);

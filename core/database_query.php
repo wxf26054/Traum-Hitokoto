@@ -51,7 +51,7 @@ class DB
 
     public function add_hitokoto($array_hitokoto,$userid){
         $conn = $this->connection();
-        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `userid`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '$userid');";
+        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `userid`, `date`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '$userid', '" . $array_hitokoto['date'] . "');";
         $retval = mysqli_query($conn,$sql );
         if(! $retval )
         {
