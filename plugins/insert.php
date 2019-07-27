@@ -18,6 +18,7 @@ foreach ($content as $key => $value) {
         'content' => $value['hitokoto'],
         'cat' => $value['cat'],
         'source' => $value['source'],
+        'author' => $value['author'],
         'date' => date('Y-m-d H:i:s',$value['date']),
     );
     //exit($array_sentence['date']);

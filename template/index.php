@@ -45,7 +45,7 @@ var hitokoto = function() {
         $hitokoto.innerHTML = '『少女祈祷中...』';
     }
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://127.0.0.1/api/?charset=utf-8&encode=json', true);
+    request.open('GET', '/api/?charset=utf-8&encode=json', true);
     request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
             var data = JSON.parse(request.responseText);
