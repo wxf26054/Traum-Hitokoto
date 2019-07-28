@@ -10,11 +10,10 @@ get_header('编辑');
 
 $hitokoto_id = isset($_GET['hitokoto_id']) ? $_GET['hitokoto_id'] : null;
 if (!empty($hitokoto_id)) {
-    $db = new DB;
-    $hitokoto = $db->get_hitokoto_by_id($hitokoto_id);
+    $hitokoto = get_hitokoto_by_id($hitokoto_id);
 
     //获取分类并转为数组(get category and transform to array)
-    $cat = $db->get_option_value('cat');
+    $cat = get_option_value('cat');
     $array_cat = json_decode($cat, true);
 
     if ($hitokoto['userid'] != $_SESSION['userinfo']['userid']) {
@@ -32,7 +31,7 @@ if (!empty($hitokoto_id)) {
                 'cat' => $hitokoto_cat,
                 'source' => $hitokoto_source,
             );
-            $result = $db->update_hitokoto($hitokoto_new);
+            $result = update_hitokoto($hitokoto_new);
             if ($result) {
                 echo '修改成功';
             } else {
@@ -42,7 +41,7 @@ if (!empty($hitokoto_id)) {
 
         //第二次请求
         if($check_string == 1){
-            $hitokoto = $db->get_hitokoto_by_id($hitokoto_id);
+            $hitokoto = get_hitokoto_by_id($hitokoto_id);
         }
         ?>
         <form method="post" >

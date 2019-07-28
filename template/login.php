@@ -18,10 +18,9 @@ if (isset($_POST['login']) ? $_POST['login'] : null == 1) {
     //判断提交的数据是否为空
     if (!empty($username) && !empty($password)) {
         //非空输出
-        $db = new DB;
-        $user_id = $db->get_userid_by_username($username);
+        $user_id = get_userid_by_username($username);
         if (!empty($user_id)) {
-            $result = $db->check_user($username, $password);
+            $result = check_user($username, $password);
             if (!empty($result)) {
                 //验证用户名和密码成功后
                 $_SESSION['userinfo'] = array(
@@ -45,7 +44,7 @@ if (isset($_POST['login']) ? $_POST['login'] : null == 1) {
 get_header('登录');
 ?>
 <p>登录页面</p>
-<form method="post" action="?login">
+<form method="post" action="">
     <p><label>账号：<input type="text" name="username"></label></p>
     <p><label>密码：<input type="password" name="password"></p>
     <p><input name="remember" type="checkbox">记住登录(暂无用)</p>

@@ -4,10 +4,10 @@ class DB
 {
 	var $link = null;
 
-	function __construct($db_file)
+	function __construct()
 	{
 		global $siteurl;
-		$this->link = new PDO('sqlite:' . ROOT . 'includes/sqlite/' . $db_file . '.db');
+		$this->link = new PDO('sqlite:' . ROOT . 'includes/sqlite/' . DB_SQLITE_FILE . '.db');
 		if (!$this->link) die('Connection Sqlite failed.\n');
 		return true;
 	}

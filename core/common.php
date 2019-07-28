@@ -3,6 +3,7 @@
 //调用数据库信息
 require_once 'config.php';
 //调用数据库处理函数库
+require_once 'class/db.class.php';
 require_once 'database_query.php';
 
 function get_header($title = '一言')
@@ -44,11 +45,11 @@ function mb_str_split($str, $count)
 
 function check_hitokoto_similarity($hitokoto)
 {
-    $db = new DB;
+    
     //检查相似度，将句子按3个字一组分割(包括标点符号)
     $aray_split_sentence = mb_str_split($hitokoto, 3);
     foreach ($aray_split_sentence as $value1) {
-        $result = $db->get_similar_sentence($value1);
+        $result = get_similar_sentence($value1);
         foreach ($result as $key => $value) {
             //similar_text() 函数计算比较两个字符串的相似度
             similar_text($hitokoto, $value['content'], $percent);

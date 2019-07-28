@@ -10,8 +10,6 @@
 $content = file_get_contents(DIR.'/step/hitokoto - chinese.json');
 $content = json_decode($content,true);
 
-$db = new DB;
-
 foreach ($content as $key => $value) {
     # code...
     $array_sentence = array(
@@ -22,5 +20,5 @@ foreach ($content as $key => $value) {
         'date' => date('Y-m-d H:i:s',$value['date']),
     );
     //exit($array_sentence['date']);
-    $result = $db->add_hitokoto($array_sentence, 1);
+    $result = add_hitokoto($array_sentence, 1);
 }

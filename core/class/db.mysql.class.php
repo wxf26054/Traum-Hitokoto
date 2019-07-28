@@ -4,14 +4,14 @@ class DB
 {
     var $link = null;
 
-    function __construct($db_host, $db_user, $db_pass, $db_name, $db_port)
+    function __construct()
     {
 
-        $this->link = @mysql_connect($db_host . ':' . $db_port, $db_user, $db_pass);
+        $this->link = @mysql_connect(DB_HOST . ':' . DB_PORT, DB_USER, DB_PASS);
 
         if (!$this->link) die('Connect Error (' . mysql_errno() . ') ' . mysql_error());
 
-        mysql_select_db($db_name, $this->link) or die(mysql_error($this->link));
+        mysql_select_db(DB_NAME, $this->link) or die(mysql_error($this->link));
 
         mysql_query("set sql_mode = ''");
         //字符转换，读库

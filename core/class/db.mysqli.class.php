@@ -4,10 +4,11 @@ class DB
 {
     var $link = null;
 
-    function __construct($db_host, $db_user, $db_pass, $db_name, $db_port)
+
+    function __construct()
     {
 
-        $this->link = mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port);
+        $this->link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
         if (!$this->link) die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
 

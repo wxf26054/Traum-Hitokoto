@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 一言添加模块(the module of adding hitokoto)
  *
@@ -19,7 +20,6 @@ $hitokoto_content = isset($_POST['hitokoto_content']) ? $_POST['hitokoto_content
 $hitokoto_cat = isset($_POST['hitokoto_cat']) ? $_POST['hitokoto_cat'] : null;
 $source = isset($_POST['source']) ? ($_POST['source'] == '来源' ? null : $_POST['source']) : null;
 
-$db = new DB;
 //检查必要参数（Check the necessary parameters）
 if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty($hitokoto_content) && !empty($hitokoto_cat)) {
     $find = check_hitokoto_similarity($hitokoto_content);
@@ -29,10 +29,11 @@ if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty
             'content' => $hitokoto_content,
             'cat' => $hitokoto_cat,
             'source' => $source,
+            'author' => null,
             'date' => null
         );
         //添加一言(add hitokoto)
-        $result = $db->add_hitokoto($array_hitokoto, $_SESSION['userinfo']['userid']);
+        $result = add_hitokoto($array_hitokoto, $_SESSION['userinfo']['userid']);
         if ($result['LAST_INSERT_ID()']) {
             echo '插入成功！ID：' . $result['LAST_INSERT_ID()'];
         } else {
@@ -44,7 +45,7 @@ if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty
 }
 
 //获取分类并转为数组(get category and transform to array)
-$cat = $db->get_option_value('cat');
+$cat = get_option_value('cat');
 $array_cat = json_decode($cat, true);
 
 ?>
@@ -54,10 +55,10 @@ $array_cat = json_decode($cat, true);
     <input type="text" name="hitokoto_content" onblur="if(this.value=='')this.value='呐，知道么，樱花飘落的速度，是每秒五厘米哦~';" onfocus="if(this.value=='呐，知道么，樱花飘落的速度，是每秒五厘米哦~')this.value='';" value="呐，知道么，樱花飘落的速度，是每秒五厘米哦~">
     <select name="hitokoto_cat">
         <?php
-foreach ($array_cat as $key => $value) {
-    echo '<option value="' . $key . '">' . $value . '</option>';
-}
-?>
+        foreach ($array_cat as $key => $value) {
+            echo '<option value="' . $key . '">' . $value . '</option>';
+        }
+        ?>
     </select>
     <input type="text" name="source" onblur="if(this.value=='')this.value='来源';" onfocus="if(this.value=='来源')this.value='';" value="来源">
     <input type="submit" value="添加">

@@ -23,10 +23,9 @@ if (isset($_POST['register_check']) ? $_POST['register_check'] : null == 1) {
             //判断密码与确认密码是否相同
             if ($password == $repassword) {
                 //向数据库增加信息
-                $db = new DB;
-                $user_id = $db->get_userid_by_username($username);
+                $user_id = get_userid_by_username($username);
                 if (empty($user_id)) {
-                    $result = $db->creat_user($username, $password);
+                    $result = creat_user($username, $password);
                     if($result)
                     echo '<script>alert("成功签定契约");</script>';
                     else

@@ -14,13 +14,11 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 $hitokoto_id = isset($_GET['hitokoto_id']) ? $_GET['hitokoto_id'] : null;
 
-$db = new DB;
-
 //处理action
 if (!empty($action) && $hitokoto_id != null) {
     switch ($action) {
         case 'delete':
-            $result = $db->delete_sentence($hitokoto_id);
+            $result = delete_sentence($hitokoto_id);
             if ($result) {
                 echo '删除成功';
             } else {
@@ -34,7 +32,7 @@ if (!empty($action) && $hitokoto_id != null) {
 }
 
 //get the number of sentences
-$sentence_number = $db->get_number_sentences($_SESSION['userinfo']['userid']);
+$sentence_number = get_number_sentences($_SESSION['userinfo']['userid']);
 //目的：求总页数，只要有余数就进一
 //[总页数 + (总记录数/每页最大记录数)的最大余数]/每页最大记录数
 $total_page = ceil ($sentence_number / 10);
@@ -42,9 +40,9 @@ if ($page> $total_page){ // 如果 页数 大于 总页数，就等于总页数
     $page = $total_page;
     }
 //get sentences
-$user_sentences = $db->get_user_sentences($_SESSION['userinfo']['userid'], $page);
+$user_sentences = get_user_sentences($_SESSION['userinfo']['userid'], $page);
 
-$cat = $db->get_option_value('cat');
+$cat = get_option_value('cat');
 $cat = json_decode($cat, true);
 
 //output
