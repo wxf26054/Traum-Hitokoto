@@ -5,6 +5,7 @@
 <head>
     <meta charset='utf-8' />
     <title><?php echo $title . '|Hitokoto/ヒトコト'; ?></title>
+    <script src="//upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.3.min.js"></script>
 </head>
 
 <body>

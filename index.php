@@ -9,6 +9,8 @@ $urlarr = parse_url($_SERVER["REQUEST_URI"]);
 
 require dirname(__FILE__) . '/load.php';
 
+captcha_init();
+
 switch ($urlarr['path']) {
     case '/login' . URL_NAME:
         require 'template/login.php';

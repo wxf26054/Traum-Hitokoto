@@ -51,6 +51,6 @@ get_header('登录');
     <input type="submit" value="提交">
     <input name="login" type="hidden" value="1">
 </form>
-没有契约？<a href="/?register" >签一个吧</a>
+没有契约？<a href="/register<?php echo URL_NAME;?>" >签一个吧</a>
 <?php
 get_footer();?>
