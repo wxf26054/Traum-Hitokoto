@@ -34,13 +34,13 @@ if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty
         );
         //添加一言(add hitokoto)
         $result = add_hitokoto($array_hitokoto, $_SESSION['userinfo']['userid']);
-        if ($result['LAST_INSERT_ID()']) {
-            echo '插入成功！ID：' . $result['LAST_INSERT_ID()'];
+        if ($result) {
+            echo '插入成功！ID：' . $result;
         } else {
             echo 'failed';
         }
     } else {
-        echo '发现相似度极高的句子!不予添加！！！<br />' . $find;
+        echo '发现相似度极高的句子!不予添加！！！<br />' . 'ID:' . $find['id'] . ' => ' . $find['content'] . '&nbsp;&nbsp;&nbsp;&nbsp;相似度' . $find['percent'] . '%<br />';
     }
 }
 

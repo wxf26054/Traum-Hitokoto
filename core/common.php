@@ -24,7 +24,6 @@ function is_user_login()
     } else {
         return true;
     }
-
 }
 
 function loginOut()
@@ -45,7 +44,7 @@ function mb_str_split($str, $count)
 
 function check_hitokoto_similarity($hitokoto)
 {
-    
+
     //检查相似度，将句子按3个字一组分割(包括标点符号)
     $aray_split_sentence = mb_str_split($hitokoto, 3);
     foreach ($aray_split_sentence as $value1) {
@@ -55,7 +54,8 @@ function check_hitokoto_similarity($hitokoto)
             similar_text($hitokoto, $value['content'], $percent);
             //相似度大于50为找到[Similarity greater than 50 is found]
             if ($percent > 50) {
-                return 'ID:' . $value['id'] . ' => ' . $value['content'] . '&nbsp;&nbsp;&nbsp;&nbsp;相似度' . $percent . '%<br />';
+                $value['percent'] = $percent;
+                return $value;
             }
         }
     }

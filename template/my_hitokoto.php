@@ -46,10 +46,10 @@ $cat = get_option_value('cat');
 $cat = json_decode($cat, true);
 
 //output
-echo '<table border="1"><tbody><tr><td>序号</td><td>句子</td><td>来源</td><td>分类</td><td>操作</td></tr>';
+echo '<table border="1"><tbody><tr><td>序号</td><td>ID</td><td>句子</td><td>来源</td><td>分类</td><td>操作</td></tr>';
 
 foreach ($user_sentences as $key => $value):
-    echo '<tr><td>' . $key . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/edit'.URL_NAME.'?hitokoto_id=' . $value['id'] . '" >编辑</a>|<a href="/my_hitokoto'.URL_NAME.'?action=delete&hitokoto_id=' . $value['id'] . '" >删除</a></td></tr>';
+    echo '<tr><td>' . $key . '</td><td>' . $value['id'] . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/edit'.URL_NAME.'?hitokoto_id=' . $value['id'] . '" >编辑</a>|<a href="/my_hitokoto'.URL_NAME.'?action=delete&hitokoto_id=' . $value['id'] . '" >删除</a></td></tr>';
 endforeach;
 reset($user_sentences);
 echo '</tbody></table>';
