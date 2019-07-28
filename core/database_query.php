@@ -37,7 +37,11 @@ function check_user($username, $password)
 function add_hitokoto($array_hitokoto, $userid)
 {
     $db = new DB;
-    $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `userid`, `author`, `date`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '$userid', '" . $array_hitokoto['author'] . "', '" . $array_hitokoto['date'] . "');";
+    if ($array_hitokoto['date'] != null)
+        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `userid`, `author`, `date`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '$userid', '" . $array_hitokoto['author'] . "', '" . $array_hitokoto['date'] . "');";
+    else
+        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `userid`, `author`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '$userid', '" . $array_hitokoto['author'] . "');";
+
     $result = $db->insert($sql);
     $db->close();
     return $result;
@@ -48,6 +52,8 @@ function get_user_sentences($userid, $page)
     $db = new DB;
     $sql = "SELECT * FROM `hitokoto` WHERE `userid` LIKE '$userid' LIMIT " . 10 * ($page - 1) . ",10";
     $result =  $db->query($sql);
+    if(!$result)
+        return false;
     $array_content = array();
     $id = 0;
     while ($row = mysqli_fetch_assoc($result)) {

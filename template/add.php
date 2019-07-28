@@ -35,7 +35,7 @@ if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty
         //添加一言(add hitokoto)
         $result = add_hitokoto($array_hitokoto, $_SESSION['userinfo']['userid']);
         if ($result) {
-            echo '插入成功！ID：' . $result;
+            echo '添加成功！ID：' . $result;
         } else {
             echo 'failed';
         }

@@ -41,15 +41,15 @@ if ($page> $total_page){ // 如果 页数 大于 总页数，就等于总页数
     }
 //get sentences
 $user_sentences = get_user_sentences($_SESSION['userinfo']['userid'], $page);
-
+if($user_sentences){
 $cat = get_option_value('cat');
 $cat = json_decode($cat, true);
 
 //output
-echo '<table border="1"><tbody><tr><td>序号</td><td>ID</td><td>句子</td><td>来源</td><td>分类</td><td>操作</td></tr>';
+echo '<table border="1"><tbody><tr><td>序号</td><td>ID</td><td>句子</td><td>来源</td><td>分类</td><td>时间</td><td>操作</td></tr>';
 
 foreach ($user_sentences as $key => $value):
-    echo '<tr><td>' . $key . '</td><td>' . $value['id'] . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td><a href="/edit'.URL_NAME.'?hitokoto_id=' . $value['id'] . '" >编辑</a>|<a href="/my_hitokoto'.URL_NAME.'?action=delete&hitokoto_id=' . $value['id'] . '" >删除</a></td></tr>';
+    echo '<tr><td>' . $key . '</td><td>' . $value['id'] . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td>' . $value['date'] . '</td><td><a href="/edit'.URL_NAME.'?hitokoto_id=' . $value['id'] . '" >编辑</a>|<a href="/my_hitokoto'.URL_NAME.'?action=delete&hitokoto_id=' . $value['id'] . '" >删除</a></td></tr>';
 endforeach;
 reset($user_sentences);
 echo '</tbody></table>';
@@ -68,5 +68,7 @@ for ($i = 1; $i <= $total_page; $i++) {
 if ($page != $total_page) {
     echo '<a href="/my_hitokoto'.URL_NAME.'?page=' . ($page + 1) . '">下一页</a><a href="/my_hitokoto'.URL_NAME.'?page=' . $total_page . '">尾页</a>';
 }
-
+}else {
+    echo '您似乎没有添加一言<br />';
+}
 get_footer();
