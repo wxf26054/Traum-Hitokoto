@@ -1,9 +1,10 @@
 <?php
- if (!defined('DIR'))exit('非法访问');
 /**
  * 用户的句子(sentences of user)
  *
  */
+if (!defined('DIR'))exit('非法访问');
+
 if (!is_user_login()) {
     header('Location: /?login');
 }

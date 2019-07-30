@@ -1,6 +1,7 @@
 <?php
 /**
  * API
+ * 
  */
 
 //计时开始
@@ -29,16 +30,6 @@ if (!empty($cat) && !empty($userid)) {
 
 if ($charset != 'utf-8' && $charset != 'gbk') {
     $charset = 'utf-8';
-}
-
-function subtext($text, $length)
-{
-    if (mb_strlen($text, 'utf8') > $length) {
-        return mb_substr($text, 0, $length, 'utf8') . '...';
-    } else {
-        return $text;
-    }
-
 }
 
 switch ($encode) {
@@ -72,6 +63,16 @@ header("Content-type: $content_type;charset=$charset");
 
 echo $hitokoto;
  
+function subtext($text, $length)
+{
+    if (mb_strlen($text, 'utf8') > $length) {
+        return mb_substr($text, 0, $length, 'utf8') . '...';
+    } else {
+        return $text;
+    }
+
+}
+
 //计时函数 
 function runtime($mode=0) {
  static $t; 

@@ -55,11 +55,11 @@ get_header('注册');
 <p>注册页面</p>
 
 <form method="post">
-    <p><label>账号：<input type="text" name="username"></label></p>
-    <p><label>密码：<input type="password" name="password"></label></p>
-    <p><label>确认密码：<input type="password" name="repassword"></label></p>
+    <p><label>账号：<input type="text" name="username" required></label></p>
+    <p><label>密码：<input type="password" name="password" required></label></p>
+    <p><label>确认密码：<input type="password" name="repassword" required></label></p>
     <?php add_security_question(); ?>
-    <p><input name="contract" type="checkbox">已经阅读并同意<a href="">《契约》</a></p>
+    <p><input name="contract" type="checkbox" required>已经阅读并同意<a href="">《契约》</a></p>
     <input type="submit" value="申请契约">
     <input type="hidden" name="register_check" value="1">
 </form>

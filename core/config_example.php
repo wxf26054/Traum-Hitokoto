@@ -1,10 +1,17 @@
 <?php
+
 /**
  * 数据库信息
  *
  */
 
- //数据库地址
+//数据库类型 MYSQL or SQLITE
+define('DB_TYPE', 'MYSQL');
+
+//SQLITE数据库文件
+define('DB_SQLITE_FILE', '');
+
+//数据库地址
 define('DB_HOST', 'localhost');
 
 //数据库用户名

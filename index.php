@@ -44,6 +44,10 @@ switch ($urlarr['path']) {
         require 'template/add.php';
         exit;
         break;
+    case '/update_log' . URL_NAME:
+        require 'template/update_log.php';
+        exit;
+        break;
     case '/plugin' . URL_NAME:
         switch ($_GET['plugin']) {
             case 'insert':

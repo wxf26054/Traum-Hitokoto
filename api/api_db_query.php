@@ -1,12 +1,14 @@
 <?php
-
+/**
+ * Get Hitokoto
+ */
 class DB
 {
     public function connection()
     {
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
         if (!$conn) {
-            die('Could not connect: ' . mysqli_error());
+            die('Could not connect: ' . mysqli_error($conn));
         }
         mysqli_set_charset($conn, DB_CHARSET);
         return $conn;

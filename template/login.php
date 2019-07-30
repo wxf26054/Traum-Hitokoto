@@ -45,8 +45,8 @@ get_header('登录');
 ?>
 <p>登录页面</p>
 <form method="post" action="">
-    <p><label>账号：<input type="text" name="username"></label></p>
-    <p><label>密码：<input type="password" name="password"></p>
+    <p><label>账号：<input type="text" name="username" required></label></p>
+    <p><label>密码：<input type="password" name="password" required></p>
     <p><input name="remember" type="checkbox">记住登录(暂无用)</p>
     <input type="submit" value="提交">
     <input name="login" type="hidden" value="1">

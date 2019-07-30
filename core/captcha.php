@@ -14,7 +14,7 @@ function add_security_question()
             <!--</div>-->
             <div class="form-group label-floating is-empty">
                 <label class="control-label" for="focusedInput1">请输入上图物质的分子式</label>
-                <input class="form-control" name="vcode2" id="vcode" type="text">
+                <input class="form-control" name="vcode2" id="vcode" type="text" required>
             </div>
         </div>
         <div id="ev" style="display:none;">
@@ -23,7 +23,7 @@ function add_security_question()
             </div>
             <div class="form-group label-floating is-empty">
                 <label class="control-label" for="focusedInput1">请输入上图事件发生日期</label>
-                <input class="form-control" name="vcode1" id="vcode1" type="text">
+                <input class="form-control" name="vcode1" id="vcode1" type="text" required>
                 <label>格式例如：19890604，公元前请加“-”表示</label>
             </div>
         </div>
@@ -33,7 +33,7 @@ function add_security_question()
             </div>
             <div class="form-group label-floating is-empty">
                 <label class="control-label" for="focusedInput1">请输入上图结果的方阵的行列式的值</label>
-                <input class="form-control" name="vcode3" id="vcode3" type="text">
+                <input class="form-control" name="vcode3" id="vcode3" type="text" required>
                 <label>请使用整数表示</label>
             </div>
         </div>
