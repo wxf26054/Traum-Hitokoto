@@ -38,37 +38,41 @@ text-shadow: 0 0 10px #529DFF;
         <div class="events_list">
           <span class="ic_time png"></span>
           <ul>
-		<li class="right_li">
+          <li class="left_li">
 		<span class="ic_events png"></span>
-		<p class="txt_events"><strong>2016.1.1祭夜blog正式起步。</strong></p>
-		</li>
-		<li class="left_li">
-		<span class="ic_events"><i class="png"></i></span>
-		<p class="txt_events"><strong>中间跌宕起伏</strong></p>
+		<p class="txt_events"><strong>2019-07-26实现页面伪静态。</strong></p>
 		</li>
 		<li class="right_li">
 		<span class="ic_events png"></span>
-		<p class="txt_events"><strong>2016.x.x日使用云落的Git主题。</strong></p>
+		<p class="txt_events"><strong>2019-07-24初步实现API功能。</strong></p>
 		</li>
 		<li class="left_li">
 		<span class="ic_events"><i class="png"></i></span>
-		<p class="txt_events"><strong>2017.1.30日生日当天发布个人第一款汉化插件。</strong></p>
+		<p class="txt_events"><strong>2019-07-21增加提交一言时的查重处理</strong></p>
 		</li>
 		<li class="right_li">
 		<span class="ic_events png"></span>
-		<p class="txt_events"><strong>2017.1.31日决定动手修改Git主题</strong></p>
+		<p class="txt_events"><strong>2019-07-20增加我的一言页面内容分页功能。</strong></p>
 		</li>
 		<li class="left_li">
 		<span class="ic_events"><i class="png"></i></span>
-		<p class="txt_events"><strong>2017.2.1日将主题灯箱更换为highslide。</strong></p>
+		<p class="txt_events"><strong>2019-07-19设计实现一言的删除与动态分类功能。</strong></p>
 		</li>
 		<li class="right_li">
 		<span class="ic_events png"></span>
-		<p class="txt_events"><strong>2017.2.4日将时间轴引入主题模板。</strong></p>
+		<p class="txt_events"><strong>2019-07-18增加了一些基础页面文件。</strong></p>
 		</li>
 		<li class="left_li">
 		<span class="ic_events"><i class="png"></i></span>
-		<p class="txt_events"><strong>2017.2.5日将前端用户中心由v1.0更换至v1.2。</strong></p>
+		<p class="txt_events"><strong>2019-07-17完善注册与登录功能。</strong></p>
+		</li>
+		<li class="right_li">
+		<span class="ic_events png"></span>
+		<p class="txt_events"><strong>2019-07-16初步建立登录注册页面。</strong></p>
+		</li>
+		<li class="left_li">
+		<span class="ic_events"><i class="png"></i></span>
+		<p class="txt_events"><strong>2019-07-14规划一言项目的开发。</strong></p>
 		</li>
 		<li class="right_li">
 		<span class="ic_events png"></span>
