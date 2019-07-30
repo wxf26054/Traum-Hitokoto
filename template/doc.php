@@ -1,4 +1,5 @@
 <?php
+
 /**
  * API文档页面
  */
@@ -7,6 +8,10 @@ if (!defined('DIR')) {
 }
 
 get_header('API文档');
+
+//获取分类并转为数组(get category and transform to array)
+$cat = get_option_value('cat');
+$array_cat = json_decode($cat, true);
 ?>
 
 <div>
@@ -15,13 +20,11 @@ get_header('API文档');
             cat:
             <select name="cat">
                 <option value="" selected="selected">任意</option>
-                <option value="a">Anime - 动画</option>
-                <option value="b">Comic - 漫画</option>
-                <option value="c">Game - 游戏</option>
-                <option value="d">Novel - 小说</option>
-                <option value="e">原创</option>
-                <option value="f">来自网络</option>
-                <option value="g">其他</option>
+                <?php
+                foreach ($array_cat as $key => $value) {
+                    echo '<option value="' . $key . '">' . $value . '</option>';
+                }
+                ?>
             </select>&nbsp;
             charset:
             <select name="charset">
@@ -58,28 +61,30 @@ get_header('API文档');
 
 <script>
     var i = 0;
-    function GetQueryString(name){
-        var reg = new RegExp("(^|[&?])"+ name +"=([^&]*)(&|$)");
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|[&?])" + name + "=([^&]*)(&|$)");
         var r = (document.getElementsByName("code")[0].value).substr(1).match(reg);
-        if(r!=null){
-            return  unescape(r[2]);
-        }else{
+        if (r != null) {
+            return unescape(r[2]);
+        } else {
             return null;
         }
     }
-    function get(){
+
+    function get() {
         var cat = GetQueryString('cat');
         var charset = GetQueryString('charset');
         var length = GetQueryString('length');
         var encode = GetQueryString('encode');
         var fun = GetQueryString('fun');
         var source = GetQueryString('source');
-        if (i == 1){
+        if (i == 1) {
             console.log("请求：/api/\n" + "参数：cat=" + cat + " charset=" + charset + " length=" + length + " encode=" + encode + " fun=" + fun + " source=" + source + "\n" + "返回：" + document.getElementById('hitokoto').contentWindow.document.getElementsByTagName('pre')[0].innerHTML);
-        }else{
+        } else {
             i = 1;
         }
-        document.getElementById("hitokoto").src = (document.getElementsByName("code")[0].value = "/api/?cat=" + document.getElementsByName("cat")[0].value +"&charset=" + document.getElementsByName("charset")[0].value +"&length=" +  document.getElementsByName("length")[0].value + "&encode=" + document.getElementsByName("encode")[0].value + "&fun=" + document.getElementsByName("fun")[0].value + "&source=" + document.getElementsByName("source")[0].value) + "&iframe=true";
+        document.getElementById("hitokoto").src = (document.getElementsByName("code")[0].value = "<?php echo API_DOMAIN; ?>/?cat=" + document.getElementsByName("cat")[0].value + "&charset=" + document.getElementsByName("charset")[0].value + "&length=" + document.getElementsByName("length")[0].value + "&encode=" + document.getElementsByName("encode")[0].value + "&fun=" + document.getElementsByName("fun")[0].value + "&source=" + document.getElementsByName("source")[0].value) + "&iframe=true";
     }
 </script>
 <?php

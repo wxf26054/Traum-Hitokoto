@@ -1,5 +1,4 @@
 <?php
-
 /**
  * 数据库信息
  *
@@ -31,3 +30,6 @@ define('DB_CHARSET', 'utf8mb4');
 
 //网页后缀
 define('URL_NAME', '.air');
+
+//API域名
+define('API_DOMAIN', 'http://127.0.0.2/api');
