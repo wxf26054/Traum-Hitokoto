@@ -15,22 +15,19 @@ get_header('更新记录');
         text-shadow: 0 0 10px #529DFF;
     }
 </style>
-</head>
-
-<body>
     <div class="wrap about_page" id="wrap">
         <div class="wrapper">
             <div class="header">
                 <div class="head">
 
                     <div class="logo_box">
-                        <h1 class="hide_txt"><a href="#" title="祭夜blog">祭夜blog<img src="https://jycdn.g9shose.com/assets/images/LOGO.png" alt="祭夜blog"></a></h1>
+                        <h1 class="hide_txt"><a href="#" title="祭夜blog">Hitokoto/ヒトコト<img src="https://www.jysafe.cn/assets/images/LOGO.png" alt="祭夜blog"></a></h1>
                     </div>
                     <div class="nav_box">
                         <ul class="nav_list" id="nav_list">
                             <li><a href="javascript:void(0);" onclick="play()" id="playbtn" class="btn_sound"></a></li>
-                            <li><a href="http://qianc.me">主页</a></li>
-                            <li><a href="">官网</a></li>
+                            <!--<li><a href="http://qianc.me">主页</a></li>-->
+                            <li><a href="https://hitokoto.jysafe.cn/">官网</a></li>
                         </ul>
                         <span class="ic_line" id="h_line"></span>
                     </div>
@@ -38,7 +35,7 @@ get_header('更新记录');
             </div>
             <div class="events_sec" id="events_sec">
                 <div class="content">
-                    <h3 class="hide_txt png">blog.qianc.me</h3>
+                    <h3 class="hide_txt png">hitokoto.jysafe.cn</h3>
                     <div class="events_list">
                         <span class="ic_time png"></span>
                         <ul>
@@ -77,14 +74,6 @@ get_header('更新记录');
                             <li class="left_li">
                                 <span class="ic_events"><i class="png"></i></span>
                                 <p class="txt_events"><strong>2019-07-14规划一言项目的开发。</strong></p>
-                            </li>
-                            <li class="right_li">
-                                <span class="ic_events png"></span>
-                                <p class="txt_events"><strong>2017.2.5日添加萌萌哒浮动小人一只，<br>code from<a href="https://myhloli.com/hitokoto.html" color="red">萝莉社</a></a></strong></p>
-                            </li>
-                            <li class="left_li">
-                                <span class="ic_events"><i class="png"></i></span>
-                                <p class="txt_events"><strong>2017.6.7日更改右下角回到顶部功能。</strong></p>
                             </li>
 
                         </ul>
