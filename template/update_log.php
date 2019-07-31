@@ -39,6 +39,10 @@ get_header('更新记录');
                     <div class="events_list">
                         <span class="ic_time png"></span>
                         <ul>
+                            <li class="right_li">
+                                <span class="ic_events png"></span>
+                                <p class="txt_events"><strong>2019-07-31整合API功能，增加返回分类名。</strong></p>
+                            </li>
                             <li class="left_li">
                                 <span class="ic_events"><i class="png"></i></span>
                                 <p class="txt_events"><strong>2019-07-26实现页面伪静态。</strong></p>

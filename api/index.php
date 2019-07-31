@@ -33,7 +33,7 @@ if ($charset != 'utf-8' && $charset != 'gbk') {
 switch ($encode) {
     case 'js':
         $content_type = 'text/javascript';
-        $hitokoto = 'function hitokoto(){document.write("<span class=' . "'hitokoto' title='分类：" . $hitokoto['cat'] . ' 出自：' . $hitokoto['source'] . ' 投稿：湘竹枫绫 @ ' . $hitokoto['date'] . "'>" . $hitokoto['content'] . '</span>");}';
+        $hitokoto = 'function hitokoto(){document.write("<span class=' . "'hitokoto' title='分类：" . $hitokoto['cat']['name'] . ' 出自：' . $hitokoto['source'] . ' 投稿：' . $hitokoto['author'] .' @ ' . $hitokoto['date'] . "'>" . $hitokoto['content'] . '</span>");}';
         break;
     case 'jsc':
         $content_type = 'text/javascript';
