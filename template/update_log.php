@@ -87,7 +87,7 @@ get_header('更新记录');
                     <h3 class="tt_bg">网站介绍</h3>
                     <center>
 
-                        <p>前路虽漫漫，祭夜不怕难。有求必有应，质量准过关。自是高人助，</p>
+                        <p>前路虽漫漫，吾等不怕难。有求必有应，质量准过关。自是高人助，</p>
                         <p>远望俯平川。天地感其善，鬼神器之酸。昔日不忘恩，今朝永为伴。</p>
                         <br><br><br>
                     </center>
@@ -100,9 +100,9 @@ get_header('更新记录');
     <audio id="audios" controls="true" autoplay="autoplay" class="audio" style="display:none;"></audio>
 
     <script>
-        var url = ["400-10056128.cos.myqcloud.com/1.mp3", "400-10056128.cos.myqcloud.com/1.mp3"];
+        var url = ["pan.cccyun.cc/down.php/45429673e3e8717656ba725e44736e8b.mp3"];
         var num = GetRandomNum(0, url.length - 1);
-        document.getElementById("audios").src = "http://" + url[num];
+        document.getElementById("audios").src = "https://" + url[num];
 
         function GetRandomNum(Min, Max) {
             var Range = Max - Min;

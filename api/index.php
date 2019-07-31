@@ -7,10 +7,8 @@
 //计时开始
 runtime();
 
-require_once '../core/config.php';
-require_once 'api_db_query.php';
+require_once '../load.php';
 
-$db = new DB;
 $cat = isset($_GET['cat']) ? $_GET['cat'] : null;
 $userid = isset($_GET['userid']) ? $_GET['userid'] : null;
 $charset = isset($_GET['charset']) ? $_GET['charset'] : null;
@@ -19,13 +17,13 @@ $fun = isset($_GET['fun']) ? $_GET['fun'] : null;
 $length = isset($_GET['length']) ? $_GET['length'] : null;
 
 if (!empty($cat) && !empty($userid)) {
-    $hitokoto = $db->get_rand_hitokoto('cat-userid', $cat, $userid);
+    $hitokoto = get_rand_hitokoto('cat-userid', $cat, $userid);
 } elseif (!empty($cat)) {
-    $hitokoto = $db->get_rand_hitokoto('cat', $cat);
+    $hitokoto = get_rand_hitokoto('cat', $cat);
 } elseif (!empty($userid)) {
-    $hitokoto = $db->get_rand_hitokoto('userid', $userid);
+    $hitokoto = get_rand_hitokoto('userid', $userid);
 } else {
-    $hitokoto = $db->get_rand_hitokoto();
+    $hitokoto = get_rand_hitokoto();
 }
 
 if ($charset != 'utf-8' && $charset != 'gbk') {
