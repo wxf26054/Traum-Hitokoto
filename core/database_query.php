@@ -5,42 +5,42 @@
  *
  */
 //include 'class/db.mysqli.class.php';
-function creat_user($username, $password)
+function create_user($user_info)
 {
     $db = new DB;
-    $sql = "INSERT INTO `users` (`username`, `password`) VALUES ('$username', '$password')";
+    $sql = "INSERT INTO `users` (`user_login`, `user_nickname`, `user_email`, `user_pass`) VALUES ('" . $user_info['user_login'] . "', '" . $user_info['user_nickname'] . "', '" . $user_info['user_email'] . "', '" . $user_info['user_pass'] . "')";
     $result = $db->query($sql);
     $db->close();
     return $result;
 }
 
-function get_userid_by_username($username)
+function get_userinfo_by_user_login($user_login)
 {
     $db = new DB;
-    $sql = "SELECT * FROM `users` WHERE `username` LIKE '$username'";
+    $sql = "SELECT * FROM `users` WHERE `user_login` LIKE '$user_login'";
     $result =  $db->query($sql);
-    $id = $db->fetch($result)['id'];
+    $user_info = $db->fetch($result);
     $db->close();
-    return $id;
+    return $user_info;
 }
 
-function check_user($username, $password)
+function check_user($user_login, $user_pass)
 {
     $db = new DB;
-    $sql = "SELECT * FROM `users` WHERE `username` LIKE '$username' AND `password` LIKE '$password'";
+    $sql = "SELECT * FROM `users` WHERE `user_login` LIKE '$user_login' AND `user_pass` LIKE '$user_pass'";
     $result = $db->query($sql);
     $id = $db->fetch($result)['id'];
     $db->close();
     return $id;
 }
 
-function add_hitokoto($array_hitokoto, $userid)
+function add_hitokoto($array_hitokoto)
 {
     $db = new DB;
     if ($array_hitokoto['date'] != null)
-        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `userid`, `author`, `date`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '$userid', '" . $array_hitokoto['author'] . "', '" . $array_hitokoto['date'] . "');";
+        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `user_id`, `author`, `date`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '".$array_hitokoto['user_id']."', '" . $array_hitokoto['author'] . "', '" . $array_hitokoto['date'] . "');";
     else
-        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `userid`, `author`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '$userid', '" . $array_hitokoto['author'] . "');";
+        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `user_id`, `author`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '".$array_hitokoto['user_id']."', '" . $array_hitokoto['author'] . "');";
 
     $result = $db->insert($sql);
     $db->close();
@@ -50,9 +50,9 @@ function add_hitokoto($array_hitokoto, $userid)
 function get_user_sentences($userid, $page)
 {
     $db = new DB;
-    $sql = "SELECT * FROM `hitokoto` WHERE `userid` LIKE '$userid' LIMIT " . 10 * ($page - 1) . ",10";
+    $sql = "SELECT * FROM `hitokoto` WHERE `user_id` LIKE '$userid' LIMIT " . 10 * ($page - 1) . ",10";
     $result =  $db->query($sql);
-    if(!$result)
+    if (!$result)
         return false;
     $array_content = array();
     $id = 0;
@@ -85,7 +85,7 @@ function delete_sentence($id)
 function get_number_sentences($userid)
 {
     $db = new DB;
-    $sql = "SELECT COUNT(*) FROM `hitokoto` WHERE `userid` = '$userid'";
+    $sql = "SELECT COUNT(*) FROM `hitokoto` WHERE `user_id` = '$userid'";
     $result = array();
     $result = $db->fetch($db->query($sql));
     $db->close();
@@ -109,7 +109,7 @@ function get_similar_sentence($keyword)
 function get_hitokoto_by_id($hitokoto_id)
 {
     $db = new DB;
-    $sql = "SELECT * FROM `hitokoto` WHERE `userid` LIKE '" . $_SESSION['userinfo']['userid'] . "' AND `id` LIKE '$hitokoto_id'";
+    $sql = "SELECT * FROM `hitokoto` WHERE `user_id` LIKE '" . $_SESSION['userinfo']['userid'] . "' AND `id` LIKE '$hitokoto_id'";
     $result =  $db->query($sql);
     $array_content = array();
     $array_content = $db->fetch($result);

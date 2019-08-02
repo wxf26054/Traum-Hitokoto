@@ -7,6 +7,10 @@ if (!defined('DIR')) {
     exit('非法访问');
 }
 
+if (!is_user_login()) {
+    header('Location:/login' . URL_NAME );
+}
+
 get_header('编辑');
 
 $hitokoto_id = isset($_GET['hitokoto_id']) ? $_GET['hitokoto_id'] : null;

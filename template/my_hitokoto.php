@@ -6,7 +6,7 @@
 if (!defined('DIR'))exit('非法访问');
 
 if (!is_user_login()) {
-    header('Location: /?login');
+    header('Location:/login' . URL_NAME );
 }
 
 get_header('我的句子');

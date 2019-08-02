@@ -18,7 +18,8 @@ foreach ($content as $key => $value) {
         'source' => $value['source'],
         'author' => $value['author'],
         'date' => date('Y-m-d H:i:s',$value['date']),
+        'user_id' => 0,
     );
     //exit($array_sentence['date']);
-    $result = add_hitokoto($array_sentence, 1);
+    $result = add_hitokoto($array_sentence);
 }

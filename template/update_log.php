@@ -21,7 +21,7 @@ get_header('更新记录');
                 <div class="head">
 
                     <div class="logo_box">
-                        <h1 class="hide_txt"><a href="#" title="祭夜blog">Hitokoto/ヒトコト<img src="https://www.jysafe.cn/assets/images/LOGO.png" alt="祭夜blog"></a></h1>
+                        <h1 class="hide_txt"><a href="#" title="Hitokoto/ヒトコト">Hitokoto/ヒトコト<img src="https://www.jysafe.cn/assets/images/LOGO.png" alt="祭夜blog"></a></h1>
                     </div>
                     <div class="nav_box">
                         <ul class="nav_list" id="nav_list">
@@ -39,6 +39,10 @@ get_header('更新记录');
                     <div class="events_list">
                         <span class="ic_time png"></span>
                         <ul>
+                            <li class="left_li">
+                                <span class="ic_events"><i class="png"></i></span>
+                                <p class="txt_events"><strong>2019-08-02优化用户系统。</strong></p>
+                            </li>
                             <li class="right_li">
                                 <span class="ic_events png"></span>
                                 <p class="txt_events"><strong>2019-07-31整合API功能，增加返回分类名。</strong></p>

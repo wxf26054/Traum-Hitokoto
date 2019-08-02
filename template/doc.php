@@ -42,12 +42,14 @@ $array_cat = json_decode($cat, true);
             </select>&nbsp;
             fun:
             <input type="text" name="fun" value="sync" style="width:70px;">&nbsp;
-            source:
-            <select name="source">
+            User ID:
+            <select id="id_select" name="user_id" onChange="selectOnChangeFunc()">
                 <option value="" selected="selected">随机</option>
                 <option value="0">系统收录</option>
-                <option value="1">我的一言</option>
+                <option value="1">用户一言</option>
+                <option value="" class="cls_option_defined">---自定义---</option>
             </select>&nbsp;
+            <input type="number" id="id_input" class="cls_input" value="可选择也可自定义输入" oninput = "value=value.replace(/[^\d]/g,'')" >
             <input type="button" value="确定" onclick="get()">
         </form>
     </div>
@@ -78,14 +80,18 @@ $array_cat = json_decode($cat, true);
         var length = GetQueryString('length');
         var encode = GetQueryString('encode');
         var fun = GetQueryString('fun');
-        var source = GetQueryString('source');
+        var user_id = GetQueryString('user_id');
         if (i == 1) {
-            console.log("请求：/api/\n" + "参数：cat=" + cat + " charset=" + charset + " length=" + length + " encode=" + encode + " fun=" + fun + " source=" + source + "\n" + "返回：" + document.getElementById('hitokoto').contentWindow.document.getElementsByTagName('pre')[0].innerHTML);
+            console.log("请求：/api/\n" + "参数：cat=" + cat + " charset=" + charset + " length=" + length + " encode=" + encode + " fun=" + fun + " user_id=" + user_id + "\n" + "返回：" + document.getElementById('hitokoto').contentWindow.document.getElementsByTagName('pre')[0].innerHTML);
         } else {
             i = 1;
         }
-        document.getElementById("hitokoto").src = (document.getElementsByName("code")[0].value = "<?php echo API_DOMAIN; ?>/?cat=" + document.getElementsByName("cat")[0].value + "&charset=" + document.getElementsByName("charset")[0].value + "&length=" + document.getElementsByName("length")[0].value + "&encode=" + document.getElementsByName("encode")[0].value + "&fun=" + document.getElementsByName("fun")[0].value + "&source=" + document.getElementsByName("source")[0].value) + "&iframe=true";
+        document.getElementById("hitokoto").src = (document.getElementsByName("code")[0].value = "<?php echo API_DOMAIN; ?>/?cat=" + document.getElementsByName("cat")[0].value + "&charset=" + document.getElementsByName("charset")[0].value + "&length=" + document.getElementsByName("length")[0].value + "&encode=" + document.getElementsByName("encode")[0].value + "&fun=" + document.getElementsByName("fun")[0].value + "&user_id=" + document.getElementsByName("user_id")[0].value) + "&iframe=true";
     }
+
+    function selectOnChangeFunc() {
+            document.getElementById('id_input').value = document.getElementById('id_select').options[document.getElementById('id_select').selectedIndex].value;
+        }
 </script>
 <?php
 get_footer();

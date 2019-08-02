@@ -10,7 +10,7 @@ if (!defined('DIR')) {
 }
 
 if (!is_user_login()) {
-    header('Location:/?login');
+    header('Location:/login' . URL_NAME );
 }
 
 get_header('添加句子');
@@ -21,7 +21,7 @@ $hitokoto_cat = isset($_POST['hitokoto_cat']) ? $_POST['hitokoto_cat'] : null;
 $source = isset($_POST['source']) ? ($_POST['source'] == '来源' ? null : $_POST['source']) : null;
 
 //检查必要参数（Check the necessary parameters）
-if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty($hitokoto_content) && !empty($hitokoto_cat)) {
+if (isset($_POST['addpage_check']) ? $_POST['addpage_check'] : null == 1 && !empty($hitokoto_content) && !empty($hitokoto_cat)) {
     $find = check_hitokoto_similarity($hitokoto_content);
     //找到就添加，否则输出相似度（Add it if found, otherwise output similarity）
     if (!$find) {
@@ -30,10 +30,11 @@ if (isset($_POST['add_hitokoto']) ? $_POST['add_hitokoto'] : null == 1 && !empty
             'cat' => $hitokoto_cat,
             'source' => $source,
             'author' => null,
-            'date' => null
+            'date' => null,
+            'user_id' => $_SESSION['userinfo']['userid'],
         );
         //添加一言(add hitokoto)
-        $result = add_hitokoto($array_hitokoto, $_SESSION['userinfo']['userid']);
+        $result = add_hitokoto($array_hitokoto);
         if ($result) {
             echo '添加成功！ID：' . $result;
         } else {
@@ -62,7 +63,7 @@ $array_cat = json_decode($cat, true);
     </select>
     <input type="text" name="source" onblur="if(this.value=='')this.value='来源';" onfocus="if(this.value=='来源')this.value='';" value="来源">
     <input type="submit" value="添加">
-    <input type="hidden" name="add_hitokoto" value="1">
+    <input type="hidden" name="addpage_check" value="1">
 </form>
 <br />
 <?php

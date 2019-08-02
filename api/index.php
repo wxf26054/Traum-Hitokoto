@@ -10,18 +10,18 @@ runtime();
 require_once '../load.php';
 
 $cat = isset($_GET['cat']) ? $_GET['cat'] : null;
-$userid = isset($_GET['userid']) ? $_GET['userid'] : null;
+$user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 $charset = isset($_GET['charset']) ? $_GET['charset'] : null;
 $encode = isset($_GET['encode']) ? $_GET['encode'] : null;
 $fun = isset($_GET['fun']) ? $_GET['fun'] : null;
 $length = isset($_GET['length']) ? $_GET['length'] : null;
 
-if (!empty($cat) && !empty($userid)) {
-    $hitokoto = get_rand_hitokoto('cat-userid', $cat, $userid);
+if (!empty($cat) && !empty($user_id)) {
+    $hitokoto = get_rand_hitokoto('cat-userid', $cat, $user_id);
 } elseif (!empty($cat)) {
     $hitokoto = get_rand_hitokoto('cat', $cat);
-} elseif (!empty($userid)) {
-    $hitokoto = get_rand_hitokoto('userid', $userid);
+} elseif (!empty($user_id)) {
+    $hitokoto = get_rand_hitokoto('userid', $user_id);
 } else {
     $hitokoto = get_rand_hitokoto();
 }

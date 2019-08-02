@@ -1,4 +1,6 @@
-<?php if (!defined('DIR')) exit('非法访问'); ?>
+<?php if (!defined('DIR')) exit('非法访问'); 
+
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -15,6 +17,6 @@
         if (empty($_SESSION['userinfo']))
             echo '未<a href="/login' . URL_NAME . '" >登录</a>';
         else
-            echo '欢迎' . $_SESSION['userinfo']['username'] . '  <a href="/logout' . URL_NAME . '" >登出</a>';
+            echo '欢迎' . $_SESSION['userinfo']['display_name'] . '  <a href="/logout' . URL_NAME . '" >登出</a>';
         ?>
     </p>
