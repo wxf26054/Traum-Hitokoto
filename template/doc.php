@@ -44,12 +44,11 @@ $array_cat = json_decode($option_cat, true);
             <input type="text" name="fun" value="sync" style="width:70px;">&nbsp;
             User ID:
             <select id="id_select" name="user_id" onChange="selectOnChangeFunc()">
-                <option value="" selected="selected">随机</option>
-                <option value="0">系统收录</option>
-                <option value="1">用户一言</option>
-                <option value="" class="cls_option_defined">---自定义---</option>
+                <option id="rand" value="" selected="selected">随机</option>
+                <option id="sys" value="0">系统收录</option>
+                <option id="custom" value="" class="cls_option_defined">---自定义---</option>
             </select>&nbsp;
-            <input type="number" id="id_input" class="cls_input" value="可选择也可自定义输入" oninput = "value=value.replace(/[^\d]/g,'')" >
+            <input type="number" id="id_input" value="可选择也可自定义输入" oninput="selectOnChangeFunc();" hidden>
             <input type="button" value="确定" onclick="get()">
         </form>
     </div>
@@ -90,8 +89,11 @@ $array_cat = json_decode($option_cat, true);
     }
 
     function selectOnChangeFunc() {
-            document.getElementById('id_input').value = document.getElementById('id_select').options[document.getElementById('id_select').selectedIndex].value;
-        }
+        if (document.getElementById('id_select').options[document.getElementById('id_select').selectedIndex].id == "custom") {
+            document.getElementById('id_input').hidden = false;
+            document.getElementById('id_select').options[document.getElementById('id_select').selectedIndex].value = document.getElementById('id_input').value;
+        }else document.getElementById('id_input').hidden = true;
+    }
 </script>
 <?php
 get_footer();
