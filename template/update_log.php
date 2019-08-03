@@ -39,6 +39,10 @@ get_header('更新记录');
                     <div class="events_list">
                         <span class="ic_time png"></span>
                         <ul>
+                            <li class="right_li">
+                                <span class="ic_events png"></span>
+                                <p class="txt_events"><strong>2019-08-03完善文档。</strong></p>
+                            </li>
                             <li class="left_li">
                                 <span class="ic_events"><i class="png"></i></span>
                                 <p class="txt_events"><strong>2019-08-02优化用户系统。</strong></p>
