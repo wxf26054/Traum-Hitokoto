@@ -87,7 +87,12 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
     $db = new DB;
 
     //获取数据总数
-    $num = $db->fetch($db->query($sql_count))['COUNT(*)'];
+    $query_num = $db->query($sql_count);
+    if ($query_num) {
+        $num = $db->fetch($query_num)['COUNT(*)'];
+    } else {
+        return array('states' => 'error', 'message' => 'this user don`t have any hitokoto');
+    }
 
     //获得随机数
     $rand_id = mt_rand(1, $num);
@@ -120,5 +125,7 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
         'id' => $result['cat'],
         'name' => $array_cat[$result['cat']]
     );
+
+    $result['states'] = 'success';
     return $result;
 }

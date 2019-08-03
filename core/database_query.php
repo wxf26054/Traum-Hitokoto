@@ -24,6 +24,16 @@ function get_userinfo_by_user_login($user_login)
     return $user_info;
 }
 
+function get_userinfo_by_user_id($user_id)
+{
+    $db = new DB;
+    $sql = "SELECT * FROM `users` WHERE `id` LIKE '$user_id'";
+    $result =  $db->query($sql);
+    $user_info = $db->fetch($result);
+    $db->close();
+    return $user_info;
+}
+
 function check_user($user_login, $user_pass)
 {
     $db = new DB;
