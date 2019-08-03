@@ -17,8 +17,8 @@ $hitokoto_id = isset($_GET['hitokoto_id']) ? $_GET['hitokoto_id'] : null;
 if (!empty($hitokoto_id)) {
 
     //获取分类并转为数组(get category and transform to array)
-    $cat = get_option_value('cat');
-    $array_cat = json_decode($cat, true);
+    $option_cat = get_option_value('cat');
+    $array_cat = json_decode($option_cat, true);
 
     $hitokoto = get_hitokoto_by_id($hitokoto_id);
     if ($hitokoto['userid'] != $_SESSION['userinfo']['userid']) {

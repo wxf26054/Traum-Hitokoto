@@ -46,8 +46,8 @@ if (isset($_POST['addpage_check']) ? $_POST['addpage_check'] : null == 1 && !emp
 }
 
 //获取分类并转为数组(get category and transform to array)
-$cat = get_option_value('cat');
-$array_cat = json_decode($cat, true);
+$option_cat = get_option_value('cat');
+$array_cat = json_decode($option_cat, true);
 
 ?>
 <p>这里是添加句子</p>

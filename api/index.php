@@ -17,26 +17,22 @@ $encode = isset($_GET['encode']) ? $_GET['encode'] : null;
 $fun = isset($_GET['fun']) ? $_GET['fun'] : null;
 $length = isset($_GET['length']) ? $_GET['length'] : null;
 
-
 if ($user_id && empty(get_userinfo_by_user_id($user_id)))
     $hitokoto = array('states' => 'error', 'message' => 'user not found');
 else {
+    //获取分类并转为数组(get category and transform to array)
+    $option_cat = get_option_value('cat');
+    $array_cat = json_decode($option_cat, true);
     if (!empty($cat) && !empty($user_id)) {
-        //获取分类并转为数组(get category and transform to array)
-        $cat = get_option_value('cat');
-        $array_cat = json_decode($cat, true);
-        if(!empty($array_cat[$cat]))
+        if (!empty($array_cat[$cat]))
             $hitokoto = get_rand_hitokoto('cat-userid', $cat, $user_id);
-        else 
-            $hitokoto = array('states' => 'error', 'message' => 'cat not found');
+        else
+            $hitokoto = array('states' => 'error', 'message' => 'cat not found(code 101)');
     } elseif (!empty($cat)) {
-        //获取分类并转为数组(get category and transform to array)
-        $cat = get_option_value('cat');
-        $array_cat = json_decode($cat, true);
-        if(!empty($array_cat[$cat]))
+        if (!empty($array_cat[$cat]))
             $hitokoto = get_rand_hitokoto('cat', $cat);
-        else 
-            $hitokoto = array('states' => 'error', 'message' => 'cat not found');
+        else
+            $hitokoto = array('states' => 'error', 'message' => 'cat not found(code 102)');
     } elseif (!empty($user_id)) {
         $hitokoto = get_rand_hitokoto('userid', $user_id);
     } else {

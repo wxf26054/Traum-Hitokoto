@@ -10,8 +10,8 @@ if (!defined('DIR')) {
 get_header('API文档');
 
 //获取分类并转为数组(get category and transform to array)
-$cat = get_option_value('cat');
-$array_cat = json_decode($cat, true);
+$option_cat = get_option_value('cat');
+$array_cat = json_decode($option_cat, true);
 ?>
 
 <div>
