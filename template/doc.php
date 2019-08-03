@@ -14,7 +14,16 @@ $option_cat = get_option_value('cat');
 $array_cat = json_decode($option_cat, true);
 ?>
 <link rel="stylesheet" type="text/css" href="assets/css/github-markdown.css" />
+
 <div class="markdown-body">
+    <blockquote class="update">
+        本页面更新：<span id="index">读取中…</span><br>
+        api更新：<span id="api">读取中…</span><br>
+        系统收录：<span id="number">读取中…</span>&nbsp;用户添加：<span id="number_uid">读取中…</span>
+    </blockquote>
+    <p>问题/反馈：ad # imjad.cn<br>
+        调用超过 <b><span id="hit"> -- </span></b> 次<br>
+        过去的 5 分钟内每分钟调用大约 <b><span id="speed"> -- </span></b> 次</p>
     <h3>食用方法</h3>
     <p><code>GET https://api.hitokoto.jysafe.cn/</code></p>
     <h3>参数说明</h3>
@@ -204,6 +213,76 @@ $array_cat = json_decode($option_cat, true);
             document.getElementById('id_select').options[document.getElementById('id_select').selectedIndex].value = document.getElementById('id_input').value;
         } else document.getElementById('id_input').hidden = true;
     }
+
+    function Ajax(type, url, data, success, failed) {
+        // 创建ajax对象
+        var xhr = null;
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP')
+        }
+
+        var type = type.toUpperCase();
+        // 用于清除缓存
+        var random = Math.random();
+
+        if (typeof data == 'object') {
+            var str = '';
+            for (var key in data) {
+                str += key + '=' + data[key] + '&';
+            }
+            data = str.replace(/&$/, '');
+        }
+
+        if (type == 'GET') {
+            if (data) {
+                xhr.open('GET', url + '?' + data, true);
+            } else {
+                xhr.open('GET', url + '?t=' + random, true);
+            }
+            xhr.send();
+
+        } else if (type == 'POST') {
+            xhr.open('POST', url, true);
+            // 如果需要像 html 表单那样 POST 数据，请使用 setRequestHeader() 来添加 http 头。
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(data);
+        }
+
+        // 处理返回数据
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    success(xhr.responseText);
+                } else {
+                    if (failed) {
+                        failed(xhr.status);
+                    }
+                }
+            }
+        }
+    }
+
+    Ajax( //Ajax(type, url, data, success, failed)
+        'get',
+        '<?php echo API_DOMAIN; ?>/counter.php',
+        '',
+        function(data) {
+            data = JSON.parse(data);
+            document.getElementById("index").innerHTML = data.index;
+            document.getElementById("api").innerHTML = data.api;
+            document.getElementById("hit").innerHTML = data.hit;
+            document.getElementById("speed").innerHTML = data.speed;
+            document.getElementById("number").innerHTML = data.number;
+            document.getElementById("number_uid").innerHTML = data.number_uid;
+        },
+        function(error) {
+            var spans = document.getElementsByClassName("update")[0].getElementsByTagName("span");
+            for (var i = 0; i < spans.length; i++) {
+                spans[i].innerHTML = "读取失败";
+            }
+        });
 </script>
 <?php
 get_footer();

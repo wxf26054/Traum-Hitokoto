@@ -42,9 +42,9 @@ function mb_str_split($str, $count)
     return $arr;
 }
 
+//检查相似度
 function check_hitokoto_similarity($hitokoto)
 {
-
     //检查相似度，将句子按3个字一组分割(包括标点符号)
     $aray_split_sentence = mb_str_split($hitokoto, 3);
     foreach ($aray_split_sentence as $value1) {
@@ -62,21 +62,25 @@ function check_hitokoto_similarity($hitokoto)
     return false;
 }
 
+//根据条件随机获取hitokoto
 function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
 {
+    $sql_count = "SELECT COUNT(*) FROM hitokoto WHERE ";
+    $sql_id = "SELECT id FROM hitokoto WHERE ";
+    
     //判断请求类型
     switch ($type) {
         case 'cat':
-            $sql_count = "SELECT COUNT(*) FROM hitokoto WHERE cat = '$value1'";
-            $sql_id = "SELECT id FROM hitokoto WHERE cat = '$value1'";
+            $sql_count .= "cat = '$value1'";
+            $sql_id .= "cat = '$value1'";
             break;
         case 'userid':
-            $sql_count = "SELECT COUNT(*) FROM hitokoto WHERE userid = '$value1'";
-            $sql_id = "SELECT id FROM hitokoto WHERE userid = '$value1'";
+            $sql_count .= "userid = '$value1'";
+            $sql_id .= "userid = '$value1'";
             break;
         case 'cat-userid':
-            $sql_count = "SELECT COUNT(*) FROM hitokoto WHERE cat = '$value1' AND userid = '$value2'";
-            $sql_id = "SELECT id FROM hitokoto WHERE cat = '$value1' AND userid = '$value2'";
+            $sql_count .= "cat = '$value1' AND userid = '$value2'";
+            $sql_id .= "cat = '$value1' AND userid = '$value2'";
             break;
         default:
             $sql_count = "SELECT COUNT(*) FROM hitokoto";
@@ -94,7 +98,7 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
         return array('states' => 'error', 'message' => 'this user don`t have any hitokoto');
     }
 
-    //获得随机数
+    //根据总数获得一个随机数
     $rand_id = mt_rand(1, $num);
 
     $get_id = $db->query($sql_id);
@@ -110,12 +114,12 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
 
     //accesses追加1
     $db->query("UPDATE hitokoto set accesses=accesses+1 where id = $array_id[$rand_id]");
-    $db->query("UPDATE `data` SET `data_value` = data_value + 1 WHERE `data`.`data_id` = 1 ");
+    $db->query("UPDATE `data` SET `data_value` = data_value + 1 WHERE `data`.`data_name` = 'all_accesses' ");
+    $db->close();
 
     //根据  取出的随机编号所对应的id  取得数据
-    $sql = "SELECT * FROM hitokoto WHERE id = $array_id[$rand_id]";
-    $result = $db->fetch($db->query($sql));
-    $db->close();
+    
+    $result = get_hitokoto_by_id($array_id[$rand_id]);
 
     //获取分类并转为数组(get category and transform to array)
     $option_cat = get_option_value('cat');
