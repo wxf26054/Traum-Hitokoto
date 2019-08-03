@@ -54,9 +54,9 @@ function add_hitokoto($array_hitokoto)
 {
     $db = new DB;
     if ($array_hitokoto['date'] != null)
-        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `user_id`, `author`, `date`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '".$array_hitokoto['user_id']."', '" . $array_hitokoto['author'] . "', '" . $array_hitokoto['date'] . "');";
+        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `user_id`, `author`, `date`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '" . $array_hitokoto['user_id'] . "', '" . $array_hitokoto['author'] . "', '" . $array_hitokoto['date'] . "');";
     else
-        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `user_id`, `author`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '".$array_hitokoto['user_id']."', '" . $array_hitokoto['author'] . "');";
+        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `user_id`, `author`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '" . $array_hitokoto['user_id'] . "', '" . $array_hitokoto['author'] . "');";
 
     $result = $db->insert($sql);
     $db->close();
@@ -91,6 +91,16 @@ function get_option_value($option_name)
     return $result['option_value'];
 }
 
+//获取数据库中指定  data name  的值
+function get_data_value($data_name)
+{
+    $db = new DB;
+    $sql = "SELECT `data_value` FROM `data` WHERE `data_name` = '$data_name'";
+    $result = $db->fetch($db->query($sql));
+    $db->close();
+    return $result['data_value'];
+}
+
 //删除指定id的hitokoto
 function delete_sentence($id)
 {
@@ -101,11 +111,12 @@ function delete_sentence($id)
     return $result;
 }
 
-//获取指定用户的 hitokoto 数量
-function get_hitokoto_number($userid)
+//获取(指定用户的) hitokoto 数量
+function get_hitokoto_number($userid = null)
 {
     $db = new DB;
-    $sql = "SELECT COUNT(*) FROM `hitokoto` WHERE `user_id` = '$userid'";
+    $sql = "SELECT COUNT(*) FROM `hitokoto`";
+    if ($userid != null) $sql .= "WHERE `user_id` = $userid";
     $result = array();
     $result = $db->fetch($db->query($sql));
     $db->close();

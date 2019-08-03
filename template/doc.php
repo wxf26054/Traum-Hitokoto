@@ -19,11 +19,11 @@ $array_cat = json_decode($option_cat, true);
     <blockquote class="update">
         本页面更新：<span id="index">读取中…</span><br>
         api更新：<span id="api">读取中…</span><br>
-        系统收录：<span id="number">读取中…</span>&nbsp;用户添加：<span id="number_uid">读取中…</span>
+        系统收录：<span id="sys_hitokoto_number">读取中…</span>&nbsp;用户添加：<span id="user_hitokoto_number">读取中…</span>
     </blockquote>
-    <p>问题/反馈：ad # imjad.cn<br>
+    <p>问题/反馈：me # jysafe.cn<br>
         调用超过 <b><span id="hit"> -- </span></b> 次<br>
-        过去的 5 分钟内每分钟调用大约 <b><span id="speed"> -- </span></b> 次</p>
+        过去的 5 分钟内每分钟调用大约 <b><span id="speed_5min"> -- </span></b> 次</p>
     <h3>食用方法</h3>
     <p><code>GET https://api.hitokoto.jysafe.cn/</code></p>
     <h3>参数说明</h3>
@@ -273,9 +273,9 @@ $array_cat = json_decode($option_cat, true);
             document.getElementById("index").innerHTML = data.index;
             document.getElementById("api").innerHTML = data.api;
             document.getElementById("hit").innerHTML = data.hit;
-            document.getElementById("speed").innerHTML = data.speed;
-            document.getElementById("number").innerHTML = data.number;
-            document.getElementById("number_uid").innerHTML = data.number_uid;
+            document.getElementById("speed_5min").innerHTML = data.speed_5min;
+            document.getElementById("sys_hitokoto_number").innerHTML = data.sys_hitokoto_number;
+            document.getElementById("user_hitokoto_number").innerHTML = data.user_hitokoto_number;
         },
         function(error) {
             var spans = document.getElementsByClassName("update")[0].getElementsByTagName("span");
