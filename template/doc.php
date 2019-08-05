@@ -266,7 +266,7 @@ $array_cat = json_decode($option_cat, true);
 
     Ajax( //Ajax(type, url, data, success, failed)
         'get',
-        '<?php echo API_DOMAIN; ?>/counter.php',
+        '<?php echo API_DOMAIN; ?>/log.php',
         '',
         function(data) {
             data = JSON.parse(data);
