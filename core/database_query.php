@@ -131,7 +131,7 @@ function get_similar_sentence($keyword)
     $query =  $db->query($sql);
     $result = array();
     $i = 0;
-    while ($value = mysqli_fetch_assoc($query)) {
+    while ($value = $db->fetch($query)) {
         $result[$i++] = $value;
     }
     $db->close();
@@ -159,4 +159,59 @@ function update_hitokoto($new_hitokoto)
     $result =  $db->query($sql);
     $db->close();
     return $result;
+}
+
+function visit_record($visitor, $visit_time)
+{
+    $db = new DB;
+    $array_visit = array(
+        'visitor' => $visitor,
+        'visit_time' => $visit_time
+    );
+
+    $result = $db->insert_array('visit', $array_visit);
+    if ($result)
+        return true;
+    else
+        $result = $db->error();
+    $db->close();
+    return $result;
+}
+
+//in $in_time seconds.
+function visit_read($in_time)
+{
+    $time = $_SERVER['REQUEST_TIME'] - $in_time;
+    $db = new DB;
+    $query = $db->query("SELECT * FROM `visit` WHERE `visit_time` > $time ");
+    $visitor = array();
+    while ($fetch = $db->fetch($query)) {
+        //统计
+        if ($fetch['visitor'] == $_SERVER['HTTP_HOST']) {
+            $fetch['visitor'] = '直接访问';
+        }
+        if (isset($visitor[$fetch['visitor']])) {
+            $visitor[$fetch['visitor']]['times']++;
+        } else {
+            $visitor[$fetch['visitor']] = array('times' => 1);
+        }
+    }
+
+    $all_hit = $db->count('SELECT count(*) FROM `visit` WHERE `visit`.`visit_time` > ' . ($_SERVER['REQUEST_TIME'] - 86400));
+
+    $result = array(
+        'visit_details' => $visitor,
+        'all_hit' => $all_hit,
+    );
+    return $result;
+}
+
+function delete_visit()
+{
+    $db = new DB;
+    $sql = 'DELETE FROM `visit` WHERE `visit`.`visit_time` < ' . $_SERVER['REQUEST_TIME'] - 86400;
+    $result = $db->query($sql);
+    if (!$result)
+        echo $db->error();
+    return TRUE;
 }

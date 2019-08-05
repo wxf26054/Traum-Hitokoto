@@ -14,6 +14,34 @@ $option_cat = get_option_value('cat');
 $array_cat = json_decode($option_cat, true);
 ?>
 <link rel="stylesheet" type="text/css" href="assets/css/github-markdown.css" />
+<div id="hitotimes"></div>
+<script>
+$.getJSON("/api/counter.php",function(res){
+	var apistyle,apimin,apiall,apilist;
+	var apipermin = 0;
+	var apipv = 0;
+	
+	apilist = '<blockquote style="padding-right:1.5em;"><table border="0" style="width:100%;">';
+	apimin = Object.keys(res.min).sort(function(a,b){return res.min[b].times-res.min[a].times});
+	Object.keys(apimin).forEach(function(key){
+		apistyle = key%2==0?' style="background:rgba(255,255,255,0.3);"':'';
+		apilist += `<tr${apistyle}><td>${apimin[key]}</td><td align=\"right\">${res.min[apimin[key]].times} r/m</td></tr>`;
+		apipermin += res.min[apimin[key]].times;
+	});
+	apilist += '</table></blockquote>';
+	
+	apilist += '<blockquote style="padding-right:1.5em;"><table border="0" style="width:100%;">';
+	apiall = Object.keys(res.all).sort(function(a,b){return res.all[b]-res.all[a]});
+	Object.keys(apiall).forEach(function(key){
+		apistyle = key%2==0?' style="background:rgba(255,255,255,0.3);"':'';
+		apilist += `<tr${apistyle}><td>${apiall[key]}</td><td align=\"right\">${res.all[apiall[key]]} r/d</td></tr>`;
+		apipv += res.all[apiall[key]];
+	});
+	apilist += '</table></blockquote>';
+	apilist += `每分钟访问量:<b>${apipermin}</b>&nbsp;&nbsp;今日访问量:<b>${apipv}</b><br />`;
+	$('#hitotimes').html(apilist);
+});
+</script>
 
 <div class="markdown-body">
     <blockquote class="update">
@@ -266,7 +294,7 @@ $array_cat = json_decode($option_cat, true);
 
     Ajax( //Ajax(type, url, data, success, failed)
         'get',
-        '<?php echo API_DOMAIN; ?>/log.php',
+        '<?php echo API_DOMAIN; ?>/counter.php',
         '',
         function(data) {
             data = JSON.parse(data);

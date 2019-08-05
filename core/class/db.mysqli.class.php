@@ -60,7 +60,7 @@ class DB
         $q = "INSERT INTO `$table`";
         $q .= " (`" . implode("`,`", array_keys($array)) . "`) ";
         $q .= " VALUES ('" . implode("','", array_values($array)) . "') ";
-
+        
         if (mysqli_query($this->link, $q))
             return mysqli_insert_id($this->link);
         return false;

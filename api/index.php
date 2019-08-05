@@ -10,6 +10,16 @@ runtime();
 
 require_once '../load.php';
 
+//记录来访
+$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+if ($referer != null)
+    $visitor = parse_url($referer)['host'];
+else
+    $visitor = $_SERVER['HTTP_HOST'];
+
+$visit_time = $_SERVER['REQUEST_TIME'];
+visit_record($visitor, $visit_time);
+
 $cat = isset($_GET['cat']) ? $_GET['cat'] : null;
 $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 $charset = isset($_GET['charset']) ? $_GET['charset'] : null;
@@ -74,6 +84,8 @@ header('Access-Control-Allow-Origin: *');
 header("Content-type: $content_type;charset=$charset");
 
 echo $hitokoto;
+
+
 
 function subtext($text, $length)
 {
