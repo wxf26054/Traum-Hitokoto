@@ -113,7 +113,7 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
     }
 
     //accesses追加1
-    $db->query("UPDATE hitokoto set accesses=accesses+1 where id = $array_id[$rand_id]");
+    //$db->query("UPDATE hitokoto set accesses=accesses+1 where id = $array_id[$rand_id]");     //用于检测算法的随机性
     $db->query("UPDATE `data` SET `data_value` = data_value + 1 WHERE `data`.`data_name` = 'all_accesses' ");
     $db->close();
 

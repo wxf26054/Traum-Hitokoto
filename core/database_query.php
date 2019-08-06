@@ -31,7 +31,7 @@ function get_userinfo_by_user_login($user_login)
 function get_userinfo_by_user_id($user_id)
 {
     $db = new DB;
-    $sql = "SELECT * FROM `users` WHERE `id` LIKE '$user_id'";
+    $sql = "SELECT * FROM `users` WHERE `uid` LIKE '$user_id'";
     $result =  $db->query($sql);
     $user_info = $db->fetch($result);
     $db->close();
