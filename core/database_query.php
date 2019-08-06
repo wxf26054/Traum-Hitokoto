@@ -151,7 +151,7 @@ function get_hitokoto_by_id($hitokoto_id)
     return $array_content;
 }
 
-//更新hitokoto
+//Update hitokoto
 function update_hitokoto($new_hitokoto)
 {
     $db = new DB;
@@ -161,8 +161,10 @@ function update_hitokoto($new_hitokoto)
     return $result;
 }
 
+//record visit event
 function visit_record($visitor, $visit_time)
 {
+    delete_visit();
     $db = new DB;
     $array_visit = array(
         'visitor' => $visitor,
@@ -187,9 +189,6 @@ function visit_read($in_time)
     $visitor = array();
     while ($fetch = $db->fetch($query)) {
         //统计
-        if ($fetch['visitor'] == $_SERVER['HTTP_HOST']) {
-            $fetch['visitor'] = '直接访问';
-        }
         if (isset($visitor[$fetch['visitor']])) {
             $visitor[$fetch['visitor']]['times']++;
         } else {
@@ -206,12 +205,14 @@ function visit_read($in_time)
     return $result;
 }
 
+//删除今天零点之前的数据(Delete data older than 00:00:00 today)
 function delete_visit()
 {
     $db = new DB;
-    $sql = 'DELETE FROM `visit` WHERE `visit`.`visit_time` < ' . $_SERVER['REQUEST_TIME'] - 86400;
+    $sql = 'DELETE FROM `visit` WHERE `visit`.`visit_time` < ' . strtotime(date('Y-m-d',time()));;
     $result = $db->query($sql);
     if (!$result)
         echo $db->error();
+    $db->close();
     return TRUE;
 }

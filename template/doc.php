@@ -17,10 +17,12 @@ $array_cat = json_decode($option_cat, true);
 <div id="hitotimes"></div>
 <script>
 $.getJSON("/api/counter.php",function(res){
-	var apistyle,apimin,apiall,apilist;
+	var apistyle,apimin,apiday,apilist;
 	var apipermin = 0;
 	var apipv = 0;
 	
+    console.log(res);
+
 	apilist = '<blockquote style="padding-right:1.5em;"><table border="0" style="width:100%;">';
 	apimin = Object.keys(res.min).sort(function(a,b){return res.min[b].times-res.min[a].times});
 	Object.keys(apimin).forEach(function(key){
@@ -31,18 +33,18 @@ $.getJSON("/api/counter.php",function(res){
 	apilist += '</table></blockquote>';
 	
 	apilist += '<blockquote style="padding-right:1.5em;"><table border="0" style="width:100%;">';
-	apiall = Object.keys(res.all).sort(function(a,b){return res.all[b]-res.all[a]});
-	Object.keys(apiall).forEach(function(key){
+	apiday = Object.keys(res.day).sort(function(a,b){return res.day[b]-res.day[a]});
+	Object.keys(apiday).forEach(function(key){
 		apistyle = key%2==0?' style="background:rgba(255,255,255,0.3);"':'';
-		apilist += `<tr${apistyle}><td>${apiall[key]}</td><td align=\"right\">${res.all[apiall[key]]} r/d</td></tr>`;
-		apipv += res.all[apiall[key]];
+		apilist += `<tr${apistyle}><td>${apiday[key]}</td><td align=\"right\">${res.day[apiday[key]].times} r/d</td></tr>`;
+		apipv += res.day[apiday[key]].times;
 	});
 	apilist += '</table></blockquote>';
 	apilist += `每分钟访问量:<b>${apipermin}</b>&nbsp;&nbsp;今日访问量:<b>${apipv}</b><br />`;
 	$('#hitotimes').html(apilist);
 });
 </script>
-
+<br /><br /><br /><br /><br />
 <div class="markdown-body">
     <blockquote class="update">
         本页面更新：<span id="index">读取中…</span><br>

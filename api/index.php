@@ -5,6 +5,8 @@
  * 
  */
 
+date_default_timezone_set("PRC") ;	//设置时区
+
 //计时开始
 runtime();
 
@@ -12,10 +14,10 @@ require_once '../load.php';
 
 //记录来访
 $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
-if ($referer != null)
+if ($referer != null) {
     $visitor = parse_url($referer)['host'];
-else
-    $visitor = $_SERVER['HTTP_HOST'];
+} else
+    $visitor = '直接访问';
 
 $visit_time = $_SERVER['REQUEST_TIME'];
 visit_record($visitor, $visit_time);

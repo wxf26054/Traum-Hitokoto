@@ -8,8 +8,8 @@
 require '../load.php';
 
 $counter = array(
-    'index' => '2019-08-03',
-    'api' => '2019-08-03',
+    'index' => '2019-08-05',
+    'api' => '2019-08-05',
     'hit' => get_data_value('all_accesses'),
     'speed_5min' => visit_read(300)['all_hit'],
     'sys_hitokoto_number' => get_hitokoto_number('0'),
