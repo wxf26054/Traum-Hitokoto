@@ -10,8 +10,17 @@
 function create_user($user_info)
 {
     $db = new DB;
-    $sql = "INSERT INTO `users` (`user_login`, `user_nickname`, `user_email`, `user_pass`) VALUES ('" . $user_info['user_login'] . "', '" . $user_info['user_nickname'] . "', '" . $user_info['user_email'] . "', '" . $user_info['user_pass'] . "')";
-    $result = $db->query($sql);
+    $array_userinfo = array(
+        'user_login' => $user_info['user_login'],
+        'user_nickname' => $user_info['user_nickname'],
+        'user_email' => $user_info['user_email'],
+        'user_pass' => $user_info['user_pass'],
+    );
+    $result = $db->insert_array('users', $array_userinfo);
+    if (!$result) {
+        echo $db->error();
+        exit;
+    }
     $db->close();
     return $result;
 }
@@ -164,7 +173,9 @@ function update_hitokoto($new_hitokoto)
 //record visit event
 function visit_record($visitor, $visit_time)
 {
-    delete_visit();
+    //删除过期数据
+    delete_outdate_visit();
+
     $db = new DB;
     $array_visit = array(
         'visitor' => $visitor,
@@ -172,12 +183,11 @@ function visit_record($visitor, $visit_time)
     );
 
     $result = $db->insert_array('visit', $array_visit);
-    if ($result)
+    if ($result) {
+        $db->close();
         return true;
-    else
-        $result = $db->error();
-    $db->close();
-    return $result;
+    } else
+        exit($db->error());
 }
 
 //in $in_time seconds.
@@ -196,6 +206,7 @@ function visit_read($in_time)
         }
     }
 
+    //今天的全部请求数
     $all_hit = $db->count('SELECT count(*) FROM `visit` WHERE `visit`.`visit_time` > ' . ($_SERVER['REQUEST_TIME'] - 86400));
 
     $result = array(
@@ -206,13 +217,13 @@ function visit_read($in_time)
 }
 
 //删除今天零点之前的数据(Delete data older than 00:00:00 today)
-function delete_visit()
+function delete_outdate_visit()
 {
     $db = new DB;
-    $sql = 'DELETE FROM `visit` WHERE `visit`.`visit_time` < ' . strtotime(date('Y-m-d',time()));;
+    $sql = 'DELETE FROM `visit` WHERE `visit`.`visit_time` < ' . strtotime(date('Y-m-d', time()));;
     $result = $db->query($sql);
     if (!$result)
-        echo $db->error();
+        exit($db->error());
     $db->close();
     return TRUE;
 }
