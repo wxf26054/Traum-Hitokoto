@@ -8,7 +8,6 @@
 
 *:本段文本源自hitokoto.us. 
 
-
 1.采用php+mysql
 
 2.支持用户系统
@@ -18,6 +17,10 @@
 4.支持API
 
 5.以上功能正在增加以及完善中
+
+
+## 在线体验
+https://hitokoto.jysafe.cn
 
 <h3>食用方法</h3>
 <p><code>GET https://api.hitokoto.jysafe.cn/</code></p>
