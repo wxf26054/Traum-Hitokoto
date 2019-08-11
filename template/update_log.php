@@ -41,7 +41,7 @@ get_header('更新记录');
                         <ul>
                             <li class="right_li">
                                 <span class="ic_events png"></span>
-                                <p class="txt_events"><strong>2019-08-11增加限制请求功能。</strong></p>
+                                <p class="txt_events"><strong>2019-08-11增加限制请求功能，提升安全性，修复问题。</strong></p>
                             </li>
                             <li class="left_li">
                                 <span class="ic_events"><i class="png"></i></span>
