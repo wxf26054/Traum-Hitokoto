@@ -5,7 +5,7 @@
  * 
  */
 
-date_default_timezone_set("PRC") ;	//设置时区
+date_default_timezone_set("PRC");    //设置时区
 
 //计时开始
 runtime();
@@ -29,32 +29,38 @@ $encode = isset($_GET['encode']) ? $_GET['encode'] : null;
 $fun = isset($_GET['fun']) ? $_GET['fun'] : null;
 $length = isset($_GET['length']) ? $_GET['length'] : null;
 
-if ($user_id && empty(get_userinfo_by_user_id($user_id)))
-    $hitokoto = array('states' => 'error', 'message' => 'user not found');
-else {
-    //获取分类并转为数组(get category and transform to array)
-    $option_cat = get_option_value('cat');
-    $array_cat = json_decode($option_cat, true);
-    if (!empty($cat) && !empty($user_id)) {
-        if (!empty($array_cat[$cat]))
-            $hitokoto = get_rand_hitokoto('cat-userid', $cat, $user_id);
-        else
-            $hitokoto = array('states' => 'error', 'message' => 'cat not found(code 101)');
-    } elseif (!empty($cat)) {
-        if (!empty($array_cat[$cat]))
-            $hitokoto = get_rand_hitokoto('cat', $cat);
-        else
-            $hitokoto = array('states' => 'error', 'message' => 'cat not found(code 102)');
-    } elseif (!empty($user_id)) {
-        $hitokoto = get_rand_hitokoto('userid', $user_id);
-    } else {
-        $hitokoto = get_rand_hitokoto();
+if (!allow_visitor($visitor)) {
+    $hitokoto = array('states' => 'error', 'message' => 'domain out of times');
+} else {
+    if ($user_id && empty(get_userinfo_by_user_id($user_id)))
+        $hitokoto = array('states' => 'error', 'message' => 'user not found');
+    else {
+        //获取分类并转为数组(get category and transform to array)
+        $option_cat = get_option_value('cat');
+        $array_cat = json_decode($option_cat, true);
+        if (!empty($cat) && !empty($user_id)) {
+            if (!empty($array_cat[$cat]))
+                $hitokoto = get_rand_hitokoto('cat-userid', $cat, $user_id);
+            else
+                $hitokoto = array('states' => 'error', 'message' => 'cat not found(code 101)');
+        } elseif (!empty($cat)) {
+            if (!empty($array_cat[$cat]))
+                $hitokoto = get_rand_hitokoto('cat', $cat);
+            else
+                $hitokoto = array('states' => 'error', 'message' => 'cat not found(code 102)');
+        } elseif (!empty($user_id)) {
+            $hitokoto = get_rand_hitokoto('userid', $user_id);
+        } else {
+            $hitokoto = get_rand_hitokoto();
+        }
     }
 }
-
 if ($charset != 'utf-8' && $charset != 'gbk') {
     $charset = 'utf-8';
 }
+
+if ($hitokoto['states'] == 'error')
+    $encode = 'json';
 
 switch ($encode) {
     case 'js':
@@ -78,7 +84,6 @@ switch ($encode) {
         } else {
             $hitokoto = $hitokoto['content'];
         }
-
         break;
 }
 

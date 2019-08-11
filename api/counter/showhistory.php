@@ -9,13 +9,13 @@
 		#center{
 			width:200px;
 			height: 500px;
-		//	background: red;
+		/*	background: red;*/
 			margin: 0 auto;
 		}
 		#left{
 			width:200px;
 			height: 500px;
-		//	background:green;
+		/*	background:green;*/
 			float: left;
 		}
 	</style>

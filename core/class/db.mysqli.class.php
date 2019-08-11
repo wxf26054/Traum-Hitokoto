@@ -34,6 +34,8 @@ class DB
     function count($q)
     {
         $result = mysqli_query($this->link, $q);
+        if(!$result)
+            return false;
         $count = mysqli_fetch_array($result);
         return $count[0];
     }

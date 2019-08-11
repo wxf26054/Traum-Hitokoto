@@ -12,7 +12,7 @@ function counter(){
     global $today;
     global $temp;
     global $conn;
-    $todayNum;
+    $todayNum = null;
     if ($temp){  
     	$privilege=$temp[0][1];
     	$todayNum = $privilege + 1;

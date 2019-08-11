@@ -4,7 +4,6 @@
  * 数据库操作
  *
  */
-//include 'class/db.mysqli.class.php';
 
 //创建用户
 function create_user($user_info)
@@ -173,13 +172,14 @@ function update_hitokoto($new_hitokoto)
 //record visit event
 function visit_record($visitor, $visit_time)
 {
-    //删除过期数据
+    //delete out date data
     delete_outdate_visit();
+
 
     $db = new DB;
     $array_visit = array(
         'visitor' => $visitor,
-        'visit_time' => $visit_time
+        'visit_time' => $visit_time,
     );
 
     $result = $db->insert_array('visit', $array_visit);
@@ -225,5 +225,29 @@ function delete_outdate_visit()
     if (!$result)
         exit($db->error());
     $db->close();
-    return TRUE;
+    return true;
+}
+
+function allow_visitor($visitor)
+{
+    if ($visitor == '直接访问' || is_visitor_vip($visitor))
+        return true;
+    $db = new DB;
+    $sql = "SELECT count(*) FROM `visit` WHERE `visit`.`visitor` = '$visitor' AND `visit`.`visit_time` > " . ($_SERVER['REQUEST_TIME'] - 60);
+    $count = $db->count($sql);
+    if ($count <= get_option_value('visit_times_minute'))
+        return true;
+    else
+        return false;
+}
+
+function is_visitor_vip($visitor)
+{
+    
+    $db = new DB;
+    $sql = "SELECT COUNT(*) FROM `user_meta` WHERE `user_meta`.`meta_key` = 'whitelist' AND `user_meta`.`meta_value` = '$visitor'";
+    if ($db->count($sql))
+        return true;
+    else
+        return false;
 }

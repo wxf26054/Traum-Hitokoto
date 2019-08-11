@@ -32,4 +32,4 @@ define('DB_CHARSET', 'utf8mb4');
 define('URL_NAME', '.air');
 
 //API域名
-define('API_DOMAIN', 'http://127.0.0.2/api');
+define('API_DOMAIN', 'http://127.0.0.5');

@@ -93,6 +93,7 @@ function counter(){
 	$result = array($totalNum , $todayNum);
 	return $result;
 }
+
 function showEveryday(){
 	$everydayUrl ="./everyday.txt";
 	$everyDay = explode(';',file_get_contents($everydayUrl));
@@ -102,6 +103,7 @@ function showEveryday(){
 		echo $everyDay[$i+1]."<br/>";
 	}
 }
+
 function showEveryhour(){
 	$everyhourUrl = "./everyhour.txt";
 	$everyHour = explode(';',file_get_contents($everyhourUrl));

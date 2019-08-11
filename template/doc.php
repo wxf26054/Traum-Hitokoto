@@ -202,7 +202,7 @@ $array_cat = json_decode($option_cat, true);
         var fun = GetQueryString('fun');
         var user_id = GetQueryString('user_id');
         if (i == 1) {
-            console.log("请求：/api/\n" + "参数：cat=" + cat + " charset=" + charset + " length=" + length + " encode=" + encode + " fun=" + fun + " user_id=" + user_id + "\n" + "返回：" + document.getElementById('hitokoto').contentWindow.document.getElementsByTagName('pre')[0].innerHTML);
+            //console.log("请求：/api/\n" + "参数：cat=" + cat + " charset=" + charset + " length=" + length + " encode=" + encode + " fun=" + fun + " user_id=" + user_id + "\n" + "返回：" + document.getElementById('hitokoto').contentWindow.document.getElementsByTagName('pre')[0].innerHTML);
         } else {
             i = 1;
         }
