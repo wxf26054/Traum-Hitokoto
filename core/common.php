@@ -19,7 +19,6 @@ function get_footer()
 function is_user_login()
 {
     if (empty($_SESSION['userinfo']) || empty($_SESSION['userinfo']['userid'])) {
-        //未登录，引导登录
         return false;
     } else {
         return true;

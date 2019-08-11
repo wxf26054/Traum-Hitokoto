@@ -11,7 +11,7 @@ function create_user($user_info)
     $db = new DB;
     $array_userinfo = array(
         'user_login' => $user_info['user_login'],
-        'user_nickname' => $user_info['user_nickname'],
+        'display_name' => $user_info['display_name'],
         'user_email' => $user_info['user_email'],
         'user_pass' => $user_info['user_pass'],
     );

@@ -3,7 +3,9 @@
  * 登录相关
  *
  */
- if (!defined('DIR'))exit('非法访问');
+
+if (!defined('DIR'))exit('非法访问');
+
 if (is_user_login()) {
     header('Location: /index.php');
     exit;
@@ -11,6 +13,7 @@ if (is_user_login()) {
 
 //判断是否为登录页面提交的表单
 if (isset($_POST['loginpage_check']) ? $_POST['loginpage_check'] : null == 1) {
+    require( DIR . '/core/class/passhash.class.php');
     //获取提交的用户名
     $user_login = isset($_POST['user_login']) ? $_POST['user_login'] : null;
     //获取提交的密码
@@ -20,11 +23,11 @@ if (isset($_POST['loginpage_check']) ? $_POST['loginpage_check'] : null == 1) {
         //非空输出
         $user_info = get_userinfo_by_user_login($user_login);
         if (!empty($user_info)) {
-            $result = check_user($user_login, $user_pass);
+            $result = PassHash::check_password($user_info['user_pass'], $user_pass);
             if (!empty($result)) {
                 //验证用户名和密码成功后
                 $_SESSION['userinfo'] = array(
-                    'userid' => $user_info['id'],
+                    'userid' => $user_info['uid'],
                     'user_login' => $user_info['user_login'],
                     'display_name' => $user_info['display_name'],
                 );

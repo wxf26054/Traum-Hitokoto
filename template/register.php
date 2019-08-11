@@ -12,6 +12,7 @@ if (is_user_login()) {
 
 //注册处理,判断数据是否来源注册页面
 if (isset($_POST['register_check']) ? $_POST['register_check'] : null == 1) {
+    require( DIR . '/core/class/passhash.class.php');
     //是否同意契约
     if (isset($_POST['contract']) ? $_POST['contract'] : null == 'on') {
         //验证码正误判断
@@ -27,9 +28,10 @@ if (isset($_POST['register_check']) ? $_POST['register_check'] : null == 1) {
             if (!empty($user_login) && !empty($user_pass) && !empty($user_repass)) {
                 //判断密码与确认密码是否相同
                 if ($user_pass == $user_repass) {
+                    $user_pass = PassHash::hash($user_pass);
                     //向数据库增加信息
-                    $user_id = get_userid_by_user_login($user_login);
-                    if (empty($user_id)) {
+                    $user_info = get_userinfo_by_user_login($user_login);
+                    if (empty($user_info)) {
                         $user_info = array(
                             'user_login' => $user_login,
                             'display_name' => $display_name,
