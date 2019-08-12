@@ -61,12 +61,7 @@ function check_user($user_login, $user_pass)
 function add_hitokoto($array_hitokoto)
 {
     $db = new DB;
-    if ($array_hitokoto['date'] != null)
-        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `user_id`, `author`, `date`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '" . $array_hitokoto['user_id'] . "', '" . $array_hitokoto['author'] . "', '" . $array_hitokoto['date'] . "');";
-    else
-        $sql = "INSERT INTO `hitokoto` (`id`, `content`, `cat`, `source`, `user_id`, `author`) VALUES (NULL, '" . $array_hitokoto['content'] . "', '" . $array_hitokoto['cat'] . "', '" . $array_hitokoto['source'] . "', '" . $array_hitokoto['user_id'] . "', '" . $array_hitokoto['author'] . "');";
-
-    $result = $db->insert($sql);
+    $result = $db->insert_array('hitokoto',$array_hitokoto);
     $db->close();
     return $result;
 }
@@ -197,6 +192,7 @@ function visit_read($in_time)
     $db = new DB;
     $query = $db->query("SELECT * FROM `visit` WHERE `visit_time` > $time ");
     $visitor = array();
+    $all_hit = 0;
     while ($fetch = $db->fetch($query)) {
         //统计
         if (isset($visitor[$fetch['visitor']])) {
@@ -204,11 +200,9 @@ function visit_read($in_time)
         } else {
             $visitor[$fetch['visitor']] = array('times' => 1);
         }
+        $all_hit++;
     }
-
-    //今天的全部请求数
-    $all_hit = $db->count('SELECT count(*) FROM `visit` WHERE `visit`.`visit_time` > ' . ($_SERVER['REQUEST_TIME'] - 86400));
-
+    
     $result = array(
         'visit_details' => $visitor,
         'all_hit' => $all_hit,

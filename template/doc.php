@@ -25,7 +25,7 @@ $array_cat = json_decode($option_cat, true);
     </blockquote>
     <p>问题/反馈：me # jysafe.cn<br>
         调用超过 <b><span id="hit"> -- </span></b> 次<br>
-        过去的 5 分钟内每分钟调用大约 <b><span id="speed_5min"> -- </span></b> 次</p>
+        过去的 5 分钟内调用大约 <b><span id="speed_5min"> -- </span></b> 次</p>
     <h3>食用方法</h3>
     <p><code>GET https://api.hitokoto.jysafe.cn/</code></p>
     <h3>参数说明</h3>
