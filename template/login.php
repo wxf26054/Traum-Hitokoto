@@ -23,8 +23,7 @@ if (isset($_POST['loginpage_check']) ? $_POST['loginpage_check'] : null == 1) {
         //非空输出
         $user_info = get_userinfo_by_user_login($user_login);
         if (!empty($user_info)) {
-            $result = PassHash::check_password($user_info['user_pass'], $user_pass);
-            if (!empty($result)) {
+            if (PassHash::check_password($user_info['user_pass'], $user_pass)) {
                 //验证用户名和密码成功后
                 $_SESSION['userinfo'] = array(
                     'userid' => $user_info['uid'],

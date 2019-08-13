@@ -22,7 +22,7 @@ function counter(){
 	$flag = 0;
 	$add = 0;
 	$length = empty($array_host_url[0]) ? 0:count($array_host_url);
-	date_default_timezone_set("PRC") ;	//设置时区
+	date_default_timezone_set("PRC");	//设置时区
 	$hour = date("H",$nowTime);
 
 	//echo $hour;

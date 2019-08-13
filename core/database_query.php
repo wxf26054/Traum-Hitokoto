@@ -28,11 +28,22 @@ function create_user($user_info)
 function get_userinfo_by_user_login($user_login)
 {
     $db = new DB;
-    $sql = "SELECT * FROM `users` WHERE `user_login` LIKE '$user_login'";
+    $sql = "SELECT * FROM `users` WHERE `user_login` = '$user_login'";
     $result =  $db->query($sql);
     $user_info = $db->fetch($result);
     $db->close();
     return $user_info;
+}
+
+//用户是否注册
+function is_user_registered($user_login)
+{
+    $db = new DB;
+    $sql = "SELECT `uid` FROM `users` WHERE `user_login` = '$user_login'";
+    $result =  $db->query($sql);
+    $user_id = $db->fetch($result);
+    $db->close();
+    return $user_id;
 }
 
 //根据 用户id 获取用户信息
@@ -44,17 +55,6 @@ function get_userinfo_by_user_id($user_id)
     $user_info = $db->fetch($result);
     $db->close();
     return $user_info;
-}
-
-//检查用户是否存在
-function check_user($user_login, $user_pass)
-{
-    $db = new DB;
-    $sql = "SELECT * FROM `users` WHERE `user_login` LIKE '$user_login' AND `user_pass` LIKE '$user_pass'";
-    $result = $db->query($sql);
-    $id = $db->fetch($result)['id'];
-    $db->close();
-    return $id;
 }
 
 //添加hitokoto

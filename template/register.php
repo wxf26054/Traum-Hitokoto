@@ -30,8 +30,7 @@ if (isset($_POST['register_check']) ? $_POST['register_check'] : null == 1) {
                 if ($user_pass == $user_repass) {
                     $user_pass = PassHash::hash($user_pass);
                     //向数据库增加信息
-                    $user_info = get_userinfo_by_user_login($user_login);
-                    if (empty($user_info)) {
+                    if (!is_user_registered($user_login)) {
                         $user_info = array(
                             'user_login' => $user_login,
                             'display_name' => $display_name,

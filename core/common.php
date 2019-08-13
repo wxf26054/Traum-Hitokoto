@@ -120,15 +120,6 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
     
     $result = get_hitokoto_by_id($array_id[$rand_id]);
 
-    //获取分类并转为数组(get category and transform to array)
-    $option_cat = get_option_value('cat');
-    $array_cat = json_decode($option_cat, true);
-
-    $result['cat'] = array(
-        'id' => $result['cat'],
-        'name' => $array_cat[$result['cat']]
-    );
-
     $result['states'] = 'success';
     return $result;
 }
