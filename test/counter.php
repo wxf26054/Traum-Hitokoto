@@ -1,38 +1,29 @@
 <?php
 function counter(){
 	$numUrl = "./counter.txt";
-	$host_URL = "./host.txt";
+	$ipUrl = "./ip.txt";
 	$everydayUrl ="./everyday.txt";
 	$everyhourUrl = "./everyhour.txt";
-
-	$referer = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null;
-	if($referer != null)
-		$now_referer_host = parse_url($referer)['host'];
-	else
-		$now_referer_host = $_SERVER['HTTP_HOST'];
-
+	$nowIp = $_SERVER['REMOTE_ADDR'];
 	$nowTime = $_SERVER['REQUEST_TIME'];
 	$counter = explode(';',file_get_contents($numUrl)); //总访问量
 	$counter[0] = (int)$counter[0];	
-
-	$array_host_url = explode(';',file_get_contents($host_URL));
+	$log = explode(';',file_get_contents($ipUrl));
 	$everyDay = explode(';',file_get_contents($everydayUrl));
 	$everyHour = explode(';',file_get_contents($everyhourUrl));
-
 	$flag = 0;
 	$add = 0;
-	$length = empty($array_host_url[0]) ? 0:count($array_host_url);
-	date_default_timezone_set("PRC");	//设置时区
+	$length = empty($log[0]) ? 0:count($log);
+	date_default_timezone_set("PRC") ;	//设置时区
 	$hour = date("H",$nowTime);
-
 	//echo $hour;
 	for($i = 0 ; $i < $length ;$i += 2){
-		if($array_host_url[$i] == $now_referer_host){
+		if($log[$i] == $nowIp){
 			$flag = 1;   //这个ip出现过
-			if($nowTime - $array_host_url[$i+1] > 3600){  //距离上次访问超过1个小时
+			if($nowTime - $log[$i+1] > 3600){  //距离上次访问超过1个小时
 				$counter[0]++;
 				$add = 1;
-				$array_host_url[$i+1] = $nowTime;
+				$log[$i+1] = $nowTime;
 				for($j = 0;$j < 48;$j+=2){
 					if($everyHour[$j]==$hour){
 						$everyHour[$j+1] = (int)$everyHour[$j+1];
@@ -42,10 +33,9 @@ function counter(){
 			}
 		}
 	}
-
 	if($flag == 0){  //这个ip第一次出现
-		$array_host_url[$i] = $now_referer_host;
-		$array_host_url[$i+1] = $nowTime;
+		$log[$i] = $nowIp;
+		$log[$i+1] = $nowTime;
 		$counter[0]++;
 		for($j = 0;$j < 48;$j+=2){
 			if($everyHour[$j]==$hour){
@@ -87,13 +77,12 @@ function counter(){
 	}
 	$totalNum = $counter[0];
 	file_put_contents($numUrl, implode(";", $counter));
-	file_put_contents($host_URL, implode(";", $array_host_url));
+	file_put_contents($ipUrl, implode(";", $log));
 	file_put_contents($everydayUrl, implode(";", $everyDay));
 	file_put_contents($everyhourUrl, implode(';', $everyHour));
 	$result = array($totalNum , $todayNum);
 	return $result;
 }
-
 function showEveryday(){
 	$everydayUrl ="./everyday.txt";
 	$everyDay = explode(';',file_get_contents($everydayUrl));
@@ -103,7 +92,6 @@ function showEveryday(){
 		echo $everyDay[$i+1]."<br/>";
 	}
 }
-
 function showEveryhour(){
 	$everyhourUrl = "./everyhour.txt";
 	$everyHour = explode(';',file_get_contents($everyhourUrl));
@@ -112,3 +100,4 @@ function showEveryhour(){
 		echo $everyHour[$i+1]."<br/>";
 	}
 }
+?>

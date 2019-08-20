@@ -5,9 +5,6 @@
 	echo "<br/>";
 	echo "<a href='showhistory.php' style='color:black;text-decoration:none'><b>历史访问:$num[0]</b></a><br/>";
 	echo  "<b>今日访问:$num[1]</b>";
-	echo "<br />everyday<br />";
-	showEveryday();
-	echo "<br />everyhour<br />";
-	showEveryhour();
+
 	
 ?>
