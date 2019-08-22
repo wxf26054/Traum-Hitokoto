@@ -4,10 +4,10 @@
  *
  */
 
-//数据库类型 MYSQL or SQLITE
+//数据库类型 MYSQL or SQLITE(not support!!)
 define('DB_TYPE', 'MYSQL');
 
-//SQLITE数据库文件
+//SQLITE Database file not support!!!
 define('DB_SQLITE_FILE', '');
 
 //数据库地址
