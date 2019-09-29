@@ -1,10 +1,10 @@
 <?php
 
 //调用数据库信息
-require_once 'config.php';
+require_once DIR.'/core/config.php';
 //调用数据库处理函数库
-require_once 'class/db.class.php';
-require_once 'database_query.php';
+require_once DIR.'/core/class/db.class.php';
+require_once DIR.'/core/database_query.php';
 
 function get_header($title = '一言')
 {

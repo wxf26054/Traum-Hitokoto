@@ -7,10 +7,11 @@ class DB
 
     function __construct()
     {
+        //die(DB_HOST.'--'.DB_USER.'--'.DB_PASS.'--'.DB_NAME.'--'.DB_PORT);
 
         $this->link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
-        if (!$this->link) die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+        if (!$this->link) die('Code: 00001  Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
 
         //mysqli_select_db($this->link, $db_name) or die(mysqli_error($this->link));
 
