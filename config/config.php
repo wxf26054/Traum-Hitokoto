@@ -25,5 +25,5 @@ define('DB_CHARSET', 'utf8mb4');
 //网页后缀
 define('URL_NAME', '.air');
 
-//API域名
+//API地址
 define('API_DOMAIN', 'http://127.0.0.2/api');

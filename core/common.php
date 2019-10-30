@@ -1,7 +1,9 @@
 <?php
-
+/**
+ * 公共函数库
+ */
 //调用数据库信息
-require_once DIR.'/core/config.php';
+require_once DIR.'/config/config.php';
 //调用数据库处理函数库
 require_once DIR.'/core/class/db.class.php';
 require_once DIR.'/core/database_query.php';
