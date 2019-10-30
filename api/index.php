@@ -8,7 +8,7 @@
 date_default_timezone_set("PRC");    //设置时区
 
 //计时开始
-runtime();
+//runtime();
 
 require_once '../load.php';
 
@@ -74,7 +74,7 @@ switch ($encode) {
     case 'json':
         $content_type = 'application/json';
         //计时结束.
-        $hitokoto['use_time'] = runtime(1);
+        //$hitokoto['use_time'] = runtime(1);
         $hitokoto = json_encode($hitokoto);
         break;
     default:
@@ -104,7 +104,7 @@ function subtext($text, $length)
 }
 
 //计时函数 
-function runtime($mode = 0)
+/*function runtime($mode = 0)
 {
     static $t;
     if (!$mode) {
@@ -116,3 +116,4 @@ function runtime($mode = 0)
     list($m1, $s1) = explode(" ", $t1);
     return sprintf("%.3f ms", ($s1 + $m1 - $s0 - $m0) * 1000);
 }
+*/

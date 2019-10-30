@@ -1,5 +1,5 @@
 <?php
-//MySQL、MySQLi、SQLite 三合一数据库操作类
+//MySQL、MySQLi 二合一数据库操作类
 if (!defined('DIR')) exit();
 
 if (extension_loaded('mysqli')) {
