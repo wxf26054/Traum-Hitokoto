@@ -7,6 +7,7 @@ if (!defined('DIR')) {
     exit('非法访问');
 }
 
+//是否登录
 if (!is_user_login()) {
     header('Location:/login' . URL_NAME );
 }

@@ -13,11 +13,13 @@ function get_header($title = '一言')
     require DIR . '/template/header.php';
 }
 
+//页面底部
 function get_footer()
 {
     require DIR . '/template/footer.php';
 }
 
+//判断是否登录
 function is_user_login()
 {
     if (empty($_SESSION['userinfo']) || empty($_SESSION['userinfo']['userid'])) {
@@ -27,12 +29,14 @@ function is_user_login()
     }
 }
 
+//登出处理
 function loginOut()
 {
     unset($_SESSION['userinfo']);
     // header('Location : /index.php');
 }
 
+//按每count个字符分割字符串
 function mb_str_split($str, $count)
 {
     $leng = strlen($str) / 3; //中文长度

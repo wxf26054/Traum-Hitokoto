@@ -2,7 +2,7 @@
 /**
  * 一言项目
  *
- * 2019年7月13日 19点17分
+ * 2019年11月16日 21点39分
  *
  */
 $urlarr = parse_url($_SERVER["REQUEST_URI"]);
@@ -11,6 +11,7 @@ require dirname(__FILE__) . '/load.php';
 
 captcha_init();
 
+//URL处理
 switch ($urlarr['path']) {
     case '/login' . URL_NAME:
         require 'template/login.php';

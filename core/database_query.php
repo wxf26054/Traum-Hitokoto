@@ -222,10 +222,14 @@ function delete_outdate_visit()
     return true;
 }
 
+//查询来源域名是否超过访问限制
 function allow_visitor($visitor)
 {
+    //白名单，直接放过
     if ($visitor == '直接访问' || is_visitor_vip($visitor))
         return true;
+
+    //非白名单，进行检查
     $db = new DB;
     $sql = "SELECT count(*) FROM `visit` WHERE `visit`.`visitor` = '$visitor' AND `visit`.`visit_time` > " . ($_SERVER['REQUEST_TIME'] - 60);
     $count = $db->count($sql);
@@ -235,6 +239,7 @@ function allow_visitor($visitor)
         return false;
 }
 
+//判断来访域名是否在VIP列表内
 function is_visitor_vip($visitor)
 {
     

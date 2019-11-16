@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * 验证码
+ * 
+ */
 
 // WordPress 注册表单添加验证图片
 function add_security_question()

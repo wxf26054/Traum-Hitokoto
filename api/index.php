@@ -22,6 +22,7 @@ if ($referer != null) {
 $visit_time = $_SERVER['REQUEST_TIME'];
 visit_record($visitor, $visit_time);
 
+//URL参数
 $cat = isset($_GET['cat']) ? $_GET['cat'] : null;
 $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 $charset = isset($_GET['charset']) ? $_GET['charset'] : null;
@@ -62,6 +63,7 @@ if ($charset != 'utf-8' && $charset != 'gbk') {
 if ($hitokoto['states'] == 'error')
     $encode = 'json';
 
+//判断输出类型  the type of output
 switch ($encode) {
     case 'js':
         $content_type = 'text/javascript';
