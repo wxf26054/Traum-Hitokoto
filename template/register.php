@@ -70,7 +70,7 @@ get_header('注册');
     <p><label>Email：<input type="text" name="user_email" required></label></p>
     <p><label>密码：<input type="password" name="user_pass" required></label></p>
     <p><label>确认密码：<input type="password" name="user_repass" required></label></p>
-    <?php //add_security_question(); ?>
+    <?php //add_security_question_form(); ?>
     <p><input name="contract" type="checkbox" required>已经阅读并同意<a href="">《契约》</a></p>
     <input type="submit" value="申请契约">
     <input type="hidden" name="register_check" value="1">

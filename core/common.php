@@ -73,7 +73,7 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
     $sql_count = "SELECT COUNT(*) FROM hitokoto WHERE ";
     $sql_id = "SELECT id FROM hitokoto WHERE ";
     
-    //判断请求类型
+    //switch the request type
     switch ($type) {
         case 'cat':
             $sql_count .= "cat = '$value1'";
@@ -95,7 +95,7 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
 
     $db = new DB;
 
-    //获取数据总数
+    //get the number of data
     $query_num = $db->query($sql_count);
     if ($query_num) {
         $num = $db->fetch($query_num)['COUNT(*)'];
@@ -103,7 +103,7 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
         return array('states' => 'error', 'message' => 'this user don`t have any hitokoto');
     }
 
-    //根据总数获得一个随机数
+    //get a rand id from 1 to num
     $rand_id = mt_rand(1, $num);
 
     $get_id = $db->query($sql_id);
@@ -122,8 +122,7 @@ function get_rand_hitokoto($type = null, $value1 = null, $value2 = null)
     $db->query("UPDATE `data` SET `data_value` = data_value + 1 WHERE `data`.`data_name` = 'all_accesses' ");
     $db->close();
 
-    //根据  取出的随机编号所对应的id  取得数据
-    
+    //get data by rand id
     $result = get_hitokoto_by_id($array_id[$rand_id]);
 
     $result['states'] = 'success';

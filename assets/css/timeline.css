@@ -10,21 +10,7 @@ body {
     min-width: 1200px;
 }
 
-body,
-dd,
-div,
-dl,
-dt,
-h1,
-h2,
-h3,
-h4,
-input,
-li,
-ol,
-p,
-table,
-ul {
+body, dd, div, dl, dt, h1, h2, h3, h4, input, li, ol, p, table, ul {
     margin: 0;
     padding: 0;
     font-weight: 400;
@@ -86,9 +72,7 @@ img {
     zoom: 1;
 }
 
-.wrap,
-.wrap input,
-.wrap textarea {
+.wrap, .wrap input, .wrap textarea {
     font: 12px/1.5 \5FAE\8F6F\96C5\9ED1, sans-serif;
     font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", "微软雅黑", tahoma, arial, simsun, "宋体";
 }
@@ -2548,12 +2532,12 @@ img {
 }
 
 .events_sec {
-    background: url("../img/timeline/bg_1.jpg") no-repeat center top;
+    background: url("../img/timeline/bg_1.jpg") /*no-repeat*/ center top;
 }
 
 .events_sec .content {
-    height: 1270px;
-    background: url("../img/timeline/bg_1.jpg") no-repeat center top;
+    /*height: 1270px;*/
+    background: url("../img/timeline/bg_1.jpg") /*no-repeat*/ center top;
     padding-top: 136px;
 }
 
@@ -2757,6 +2741,31 @@ img {
     -webkit-animation: entic_effect .8s 9s linear both;
 }
 
+.events_list li:nth-child(12) .ic_events {
+    animation: entic_effect .8s 5s linear both;
+    -webkit-animation: entic_effect .8s 9.8s linear both;
+}
+
+.events_list li:nth-child(13) .ic_events {
+    animation: entic_effect .8s 5s linear both;
+    -webkit-animation: entic_effect .8s 10.6s linear both;
+}
+
+.events_list li:nth-child(14) .ic_events {
+    animation: entic_effect .8s 5s linear both;
+    -webkit-animation: entic_effect .8s 11.4s linear both;
+}
+/*
+.events_list li:nth-child(15) .ic_events {
+    animation: entic_effect .8s 5s linear both;
+    -webkit-animation: entic_effect .8s 12.2s linear both;
+}
+
+.events_list li:nth-child(16) .ic_events {
+    animation: entic_effect .8s 5s linear both;
+    -webkit-animation: entic_effect .8s 13s linear both;
+}
+*/
 @keyframes entic_effect {
     0% {
         width: 20px;
@@ -2846,6 +2855,21 @@ img {
     -webkit-animation: enttxt_effect .8s 9s linear both;
 }
 
+.events_list li:nth-child(12) .txt_events {
+    animation: enttxt_effect .8s 5s linear both;
+    -webkit-animation: enttxt_effect .8s 9.8s linear both;
+}
+
+.events_list li:nth-child(13) .txt_events {
+    animation: enttxt_effect .8s 5s linear both;
+    -webkit-animation: enttxt_effect .8s 10.6s linear both;
+}
+
+.events_list li:nth-child(14) .txt_events {
+    animation: enttxt_effect .8s 5s linear both;
+    -webkit-animation: enttxt_effect .8s 11.4s linear both;
+}
+
 @keyframes enttxt_effect {
     0% {
         transform: translateY(-10px);
@@ -2868,9 +2892,10 @@ img {
     }
 }
 
+/*end icon*/
 .events_list .ic_arr {
     animation: entarr_effect .6s 8s linear both;
-    -webkit-animation: entarr_effect .6s 8s linear both;
+    -webkit-animation: entarr_effect .6s 12.2s linear both;
 }
 
 @keyframes entarr_effect {

@@ -5,7 +5,7 @@
  *
  */
 
-//创建用户
+//create user by user_info
 function create_user($user_info)
 {
     $db = new DB;
@@ -24,7 +24,7 @@ function create_user($user_info)
     return $result;
 }
 
-//根据用户名获取用户信息
+//get user info by user login
 function get_userinfo_by_user_login($user_login)
 {
     $db = new DB;
@@ -35,7 +35,7 @@ function get_userinfo_by_user_login($user_login)
     return $user_info;
 }
 
-//用户是否注册
+//check the registered statue of the user login
 function is_user_registered($user_login)
 {
     $db = new DB;
@@ -46,7 +46,7 @@ function is_user_registered($user_login)
     return $user_id;
 }
 
-//根据 用户id 获取用户信息
+//get user info by user id
 function get_userinfo_by_user_id($user_id)
 {
     $db = new DB;

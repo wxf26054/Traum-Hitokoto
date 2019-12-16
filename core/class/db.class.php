@@ -3,6 +3,7 @@
 if (!defined('DIR')) exit();
 
 if (extension_loaded('mysqli')) {
+	// we use the new mysql
 	require_once 'db.mysqli.class.php';
 } else {
 	// we use the old mysql
