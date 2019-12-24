@@ -17,7 +17,7 @@ define('DB_PASS', '');
 define('DB_NAME', 'hitokoto');
 
 //数据库端口
-define('DB_PORT', '3306');
+define('DB_PORT', '3308');
 
 //数据库编码
 define('DB_CHARSET', 'utf8mb4');

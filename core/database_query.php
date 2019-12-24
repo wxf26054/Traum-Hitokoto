@@ -67,10 +67,13 @@ function add_hitokoto($array_hitokoto)
 }
 
 //取得指定页数的用户的hitokoto
-function get_user_hitokoto_by_page($userid, $page)
+function get_user_hitokoto_by_page($user_id, $page)
 {
+    if($user_id == 1)
+        $user_id = '1\' OR `user_id` = \'0';
     $db = new DB;
-    $sql = "SELECT * FROM `hitokoto` WHERE `user_id` LIKE '$userid' LIMIT " . 10 * ($page - 1) . ",10";
+    $sql = "SELECT * FROM `hitokoto` WHERE `user_id` = '$user_id' LIMIT " . 10 * ($page - 1) . ",10";
+    //die($sql);
     $result =  $db->query($sql);
     if (!$result)
         return false;
@@ -115,11 +118,14 @@ function delete_sentence($id)
 }
 
 //获取(指定用户的) hitokoto 数量
-function get_hitokoto_number($userid = null)
+function get_hitokoto_number($user_id = null)
 {
+    if($user_id == 1)
+        $user_id = '1 OR `user_id` = 0';
     $db = new DB;
     $sql = "SELECT COUNT(*) FROM `hitokoto`";
-    if ($userid != null) $sql .= "WHERE `user_id` = $userid";
+    if ($user_id != null) $sql .= "WHERE `user_id` = $user_id";
+    //die($sql);
     $result = array();
     $result = $db->fetch($db->query($sql));
     $db->close();

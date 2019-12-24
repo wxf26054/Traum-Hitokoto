@@ -34,42 +34,44 @@ if (!empty($action) && $hitokoto_id != null) {
 
 //get the number of sentences
 $sentence_number = get_hitokoto_number($_SESSION['userinfo']['userid']);
+
 //目的：求总页数，只要有余数就进一
 //[总页数 + (总记录数/每页最大记录数)的最大余数]/每页最大记录数
 $total_page = ceil ($sentence_number / 10);
-if ($page> $total_page){ // 如果 页数 大于 总页数，就等于总页数
+if ($page > $total_page){ // 如果 页数 大于 总页数，就等于总页数
     $page = $total_page;
     }
 
 //get sentences
 $user_sentences = get_user_hitokoto_by_page($_SESSION['userinfo']['userid'], $page);
 if($user_sentences){
-$cat = get_option_value('cat');
-$cat = json_decode($cat, true);
+    $cat = get_option_value('cat');
+    $cat = json_decode($cat, true);
 
-//output
-echo '<table border="1"><tbody><tr><td>序号</td><td>ID</td><td>句子</td><td>来源</td><td>分类</td><td>时间</td><td>操作</td></tr>';
+    //output
+    echo '<table border="1"><tbody><tr><td>序号</td><td>ID</td><td>句子</td><td>来源</td><td>分类</td><td>时间</td><td>操作</td></tr>';
 
-foreach ($user_sentences as $key => $value):
-    echo '<tr><td>' . $key . '</td><td>' . $value['id'] . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td>' . $value['date'] . '</td><td><a href="/edit'.URL_NAME.'?hitokoto_id=' . $value['id'] . '" >编辑</a>|<a href="/my_hitokoto'.URL_NAME.'?action=delete&hitokoto_id=' . $value['id'] . '" >删除</a></td></tr>';
-endforeach;
-reset($user_sentences);
-echo '</tbody></table>';
+    foreach ($user_sentences as $key => $value):
+        echo '<tr><td>' . $key . '</td><td>' . $value['id'] . '</td><td>' . $value['content'] . '</td><td>' . $value['source'] . '</td><td>' . $cat[$value['cat']] . '</td><td>' . date('Y-m-d H:i:s', $value['date']) . '</td><td><a href="/edit'.URL_NAME.'?hitokoto_id=' . $value['id'] . '" >编辑</a>|<a href="/my_hitokoto'.URL_NAME.'?action=delete&hitokoto_id=' . $value['id'] . '" >删除</a></td></tr>';
+    endforeach;
 
-if ($page != 1) {
-    echo '<a href="/my_hitokoto'.URL_NAME.'?page=1">首页</a><a href="/my_hitokoto'.URL_NAME.'?page=' . ($page - 1) . '">上一页</a>';
-}
-for ($i = 1; $i <= $total_page; $i++) {
-    if ($i != $page) {
-        if($i > $page - 5 && $i < $page + 5)
-        echo '&nbsp;<a href="/my_hitokoto'.URL_NAME.'?page=' . $i . '">' . $i . '</a>&nbsp;';
-    } else {
-        echo $i;
+    reset($user_sentences);
+    echo '</tbody></table>';
+
+    if ($page != 1) {
+        echo '<a href="/my_hitokoto'.URL_NAME.'?page=1">首页</a><a href="/my_hitokoto'.URL_NAME.'?page=' . ($page - 1) . '">上一页</a>';
     }
-}
-if ($page != $total_page) {
-    echo '<a href="/my_hitokoto'.URL_NAME.'?page=' . ($page + 1) . '">下一页</a><a href="/my_hitokoto'.URL_NAME.'?page=' . $total_page . '">尾页</a>';
-}
+    for ($i = 1; $i <= $total_page; $i++) {
+        if ($i != $page) {
+            if($i > $page - 5 && $i < $page + 5)
+            echo '&nbsp;<a href="/my_hitokoto'.URL_NAME.'?page=' . $i . '">' . $i . '</a>&nbsp;';
+        } else {
+            echo $i;
+        }
+    }
+    if ($page != $total_page) {
+        echo '<a href="/my_hitokoto'.URL_NAME.'?page=' . ($page + 1) . '">下一页</a><a href="/my_hitokoto'.URL_NAME.'?page=' . $total_page . '">尾页</a>';
+    }
 }else {
     echo '您似乎没有添加一言<br />';
 }

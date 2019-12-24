@@ -9,6 +9,9 @@ $urlarr = parse_url($_SERVER["REQUEST_URI"]);
 
 require dirname(__FILE__) . '/load.php';
 
+$start = new DB();
+$start->close();
+
 captcha_init();
 
 //URL处理

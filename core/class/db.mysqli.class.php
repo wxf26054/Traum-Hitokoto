@@ -1,5 +1,5 @@
 <?php
-
+//error_reporting(0);
 class DB
 {
     var $link = null;

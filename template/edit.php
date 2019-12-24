@@ -22,6 +22,12 @@ if (!empty($hitokoto_id)) {
     $array_cat = json_decode($option_cat, true);
 
     $hitokoto = get_hitokoto_by_id($hitokoto_id);
+
+    if($hitokoto['user_id'] == 0 && $_SESSION['userinfo']['userid'] == 1)
+    {
+        $hitokoto['user_id'] = 1;
+    }
+
     if ($hitokoto['user_id'] != $_SESSION['userinfo']['userid']) {
         echo '一言很是生气地说道：哼！你不是我的的主人！';
     } else {
